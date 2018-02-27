@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | KeepJiang&#39;s blog</title>
+  <title>iOS打包遇到错误解决和记录 | KeepJiang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="iOS,OC,开发者,程序猿,编程,代码,开源,IT网站,Developer,Programmer,Coder">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KeepJiang&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="记录学习的点点滴滴。">
+<meta name="keywords" content="iOS, error, Invalid toolchain, Distribution certification">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS打包遇到错误解决和记录">
+<meta property="og:url" content="http://yoursite.com/2018/01/24/iOS打包遇到错误解决和记录/index.html">
 <meta property="og:site_name" content="KeepJiang&#39;s blog">
+<meta property="og:description" content="记录学习的点点滴滴。">
+<meta property="og:updated_time" content="2018-02-27T01:34:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KeepJiang&#39;s blog">
+<meta name="twitter:title" content="iOS打包遇到错误解决和记录">
+<meta name="twitter:description" content="记录学习的点点滴滴。">
   
     <link rel="alternative" href="/atom.xml" title="KeepJiang&#39;s blog" type="application/atom+xml">
   
@@ -144,36 +148,91 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-iOS打包遇到错误解决和记录" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/24/iOS打包遇到错误解决和记录/" class="archive-article-date">
-  	<time datetime="2018-01-24T09:13:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/24/iOS打包遇到错误解决和记录/">iOS打包遇到错误解决和记录</a>
+    <h1 class="article-title" itemprop="name">
+      iOS打包遇到错误解决和记录
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/01/24/iOS打包遇到错误解决和记录/" class="archive-article-date">
+  	<time datetime="2018-01-24T09:13:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>由于iOS的良好生态环境，对app的严格审查，iOS开发打包上传到Appstore不管对初学者还是高手都是一个必须熟悉的流程，对各种证书和流程有深入的理解就更好</p>
+</blockquote>
+<p>在此记录打包上传appstore的基本流程，对证书等概念的理解以及遇到的错误和解决方法。</p>
+<h3 id="iOS开发证书等基本概念"><a href="#iOS开发证书等基本概念" class="headerlink" title="iOS开发证书等基本概念"></a>iOS开发证书等基本概念</h3><p>首先iOS开发不同于android等其它开发，要在真机上运行和调试必须首先注册成为苹果开发者，获得苹果开发者帐号；xcode7之前开发者必须申请开发者证书才能进行真机调试，xcode7之后可以进行免证书运行。接下来介绍几个证书相关的概念。</p>
+<ul>
+<li>苹果开发者帐号：苹果开发者帐号分为个人帐号、公司帐号、企业帐号、教育机构帐号，个人帐号和公司帐号99美元/年，个人帐号只能个人使用，而且也帐号能建立团队，通过团队和权限管理的方式来使用，方便多人协作；企业帐号299美元/年，企业帐号不能发布app到appstore，不限制设备个数，主要用来内部发布应用；教育账号为苹果开发者计划授权机构，不需要支付费用，app也只能再内部使用，无法对外正式发布</li>
+<li>Certification(证书)：用来证明iOS App内容（executable code）的合法性和完整性的数字证书。对于想安装到真机或发布到AppStore的应用程序（App），只有经过签名验证（Signature Validated）才能确保来源可信，并且保证App内容是完整、未经篡改的。又分为Developer Certification(开发证书)和Distribution Certification(发布证书)，开发证书用来在电脑上的开发测试，可以生成多个副本多人使用；发布证书用来打包生成ipa上传到Appstore，可以制作测试版或者发布版本，只有配置电脑可以使用</li>
+<li>Provisioning Profile(授权文件)：包含App ID、设备UDID和证书，保证app的完整性，同时验证app id和bundle id一致，最后确保该设备授权运行该app</li>
+</ul>
+<h3 id="iOS打包上传基本流程"><a href="#iOS打包上传基本流程" class="headerlink" title="iOS打包上传基本流程"></a>iOS打包上传基本流程</h3><p>简单总结下iOS打包上传Appstore基本流程：</p>
+<ol>
+<li>使用xcode clean工程，然后选择项目的release版本的配置</li>
+<li>选择菜单栏product archive进行打包</li>
+<li>打包成功后会进入打包选择界面</li>
+<li>选中打好的包，然后选择右边菜单中的export，选择要导出的包类型和相应的证书后即可</li>
+<li>根据类型，如果是内测版本，直接上传到相应内测平台即可；如果是发布版本使用xcode自带的application loader即可将ipa包上传到iTunes connect</li>
+<li>iTunes connect验证通过后，即可根据网站提示填写相关信息和图片，然后选择刚验证通过的构建版本提交审核（其中填写版本更新信息可以等待审核通过后再任意修改）</li>
+<li>审核通过后即可选择发布，发布成功后大概半小时以后可在Appstore进行更新<br>其中可能碰到各种各样的错误，根据提示或者网络搜索解决错误</li>
+</ol>
+<h3 id="iOS打包上传错误记录"><a href="#iOS打包上传错误记录" class="headerlink" title="iOS打包上传错误记录"></a>iOS打包上传错误记录</h3><ol>
+<li>项目中使用xib或者storyboard，打包出现”Internal error.Please file a bug at bugreport.apple.com and attatch”错误，cmd + shift + k然后 cmd + option + shift + k即可解决</li>
+<li>项目archive后export选择证书后提示”Your account already has a valid iOS Distribution certificate!”错误，只能在发布mac上面使用发布证书来打包，或者revoke之前的证书，重新生成证书来打包（revoke证书的操作非常危险，会让所有其它使用改证书的地方失效，需要重新申请，因此这个操作需要慎重再慎重，确保只有自己使用时才可以这么操作）</li>
+<li>上传过程提示version版本过低，项目中国年version对应上传到iTunes connect的版本号，build的版本对应再Appstore中显示的版本号，因此每次重新上传到iTunes connect时，version版本号必须递增，version和build不需要一一对应，因此version可以使用一个长整数</li>
+<li>使用application loader上传时出现” ERROR ITMS-90534: “Invalid Toolchain. New apps and app updates must be built with the public (GM) versions of Xcode 6 or later, macOS, and iOS SDK or later. Don’t submit apps built with beta software including beta macOS builds.”错误，根据提示使用正式版本的8.3.2版本的Xcode重新打包后正常上传</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝咖啡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -189,7 +248,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -202,17 +261,94 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/24/iOS打包遇到错误解决和记录/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
+
   
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +371,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
