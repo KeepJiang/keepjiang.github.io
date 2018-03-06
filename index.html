@@ -146,6 +146,69 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-测试引用图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/27/测试引用图片/">测试引用图片</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/27/测试引用图片/" class="archive-article-date">
+  	<time datetime="2018-02-27T12:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>测试引用图片<br><img src="/2018/02/27/测试引用图片/1.jpeg" title="这是一个新的博客的图片的说明"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/27/测试引用图片/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-iOS打包遇到错误解决和记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -173,7 +236,7 @@
 <h3 id="iOS开发证书等基本概念"><a href="#iOS开发证书等基本概念" class="headerlink" title="iOS开发证书等基本概念"></a>iOS开发证书等基本概念</h3><p>首先iOS开发不同于android等其它开发，要在真机上运行和调试必须首先注册成为苹果开发者，拥有苹果开发者帐号；xcode7之前开发者必须申请开发者证书才能进行真机调试，xcode7之后可以进行免证书运行。接下来介绍几个证书相关的概念。</p>
 <ul>
 <li>苹果开发者帐号：苹果开发者帐号分为个人帐号、公司帐号、企业帐号、教育机构帐号，个人帐号和公司帐号99美元/年，个人帐号只能个人使用；公司帐号能建立团队，通过团队和权限管理的方式来使用，方便多人协作；企业帐号299美元/年，企业帐号不能发布app到appstore，不限制设备个数，主要用来内部发布应用；教育账号为苹果开发者计划授权机构，不需要支付费用，app也只能在内部使用，无法对外正式发布</li>
-<li>Certification(证书)：用来验证iOS App内容（executable code）的合法性和完整性的数字证书。对于想安装到真机或发布到AppStore的应用程序（App），只有经过签名验证（Signature Validated）才能确保来源可信，并且保证App内容是完整、未经篡改的。证书又分为Developer Certification(开发证书)和Distribution Certification(发布证书)，开发证书用来在电脑上的开发测试，可以生成多个副本供多人使用；发布证书用来打包生成ipa上传到Appstore，可以制作测试版或者发布版本，只有配置的电脑可以使用</li>
+<li>Certification(证书)：用来验证iOS App内容（executable code）的合法性和完整性的数字证书。对于想安装到真机或发布到AppStore的应用程序（App），只有经过签名验证（Signature Validated）才能确保来源可信，并且保证App内容是完整、未经篡改的。证书又分为Developer Certification(开发证书)和Distribution Certification(发布证书)，开发证书用来在电脑上的开发测试，可以生成多个副本供多人使用；发布证书用来打包生成ipa上传到Appstore，可以制作测试版或者发布版本，只有配置的电脑可以使用，可以到处p12文件供他人使用。</li>
 <li>Provisioning Profile(授权文件)：包含App ID、设备UDID和证书，保证app的完整性，同时验证app id和bundle id是否一致，并确保该设备授权运行该app</li>
 </ul>
 <h3 id="iOS打包上传基本流程"><a href="#iOS打包上传基本流程" class="headerlink" title="iOS打包上传基本流程"></a>iOS打包上传基本流程</h3><p>简单总结下iOS打包上传Appstore基本流程：</p>
