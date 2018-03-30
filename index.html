@@ -146,28 +146,40 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-测试引用图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-CoreData详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/27/测试引用图片/">测试引用图片</a>
+      <a class="article-title" href="/2018/03/30/CoreData详解/">CoreData详解</a>
     </h1>
   
 
         
-        <a href="/2018/02/27/测试引用图片/" class="archive-article-date">
-  	<time datetime="2018-02-27T12:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-27</time>
+        <a href="/2018/03/30/CoreData详解/" class="archive-article-date">
+  	<time datetime="2018-03-30T12:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>测试引用图片<br><img src="/2018/02/27/测试引用图片/1.jpeg" title="这是一个新的博客的图片的说明"></p>
-
+        <blockquote>
+<p><strong>CoreData</strong>是Apple官方为iOS提供的一个数据持久化方案，其本质是一个通过封装底层数据操作，让程序员以面向对象的方式存储和管理数据的ORM框架（Object-Relational Mapping：对象-关系映射，简称ORM）。虽然底层支持SQLite、二进制数据、xml等多种文件存储，但是主要还是用来操作SQLite数据库。<br>程序员不需要学习或者使用SQL语句，只需要使用<strong>CoreData</strong>框架提供的对象和接口以及图形化工具，即可完成SQLite数据库的创建、表关系、增删改查等一系列操作，在一定程度上降低了程序员的学习成本并增加了代码的统一性和可阅读性。</p>
+</blockquote>
+<h3 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h3><p><strong>CoreData</strong>作为一个ORM框架，需要解决实体对象和数据库数据的映射关系，将OC对象转化为数据，保存到SQLite文件中，同时能将保存在数据库中的数据还原成OC对象。概要结构如下：<br><img src="/2018/03/30/CoreData详解/15215371819279.jpg"></p>
+<p><strong>CoreData</strong>主要包含以下几个类：</p>
+<ul>
+<li><strong>NSManagedObjectModel</strong>：托管对象模型，映射实体类和数据库数据的关系，本质是一个XML文件，后面简称<strong>MOM</strong></li>
+<li><strong>NSManagedObject</strong>：托管对象，对应数据库数据的实体，后面简称<strong>MO</strong></li>
+<li><strong>NSManagedObjectContext</strong>：托管对象上下文，管理托管对象，后面简称<strong>MOC</strong></li>
+<li><strong>NSPersistentStoreCoordinator</strong>：持久化存储调度器，用来处理磁盘持久化数据和实体类对象的相互转化，后面简称<strong>PSC</strong></li>
+<li><strong>NSPersistentStore</strong>：持久化存储器，负责磁盘持久化数据存取，后面简称<strong>PS</strong></li></ul>
+        
+          <a class="article-more-a" href="/2018/03/30/CoreData详解/#more">more >></a>
+        
       
 
       
@@ -175,11 +187,37 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">数据持久化</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记//" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/27/测试引用图片/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/03/30/CoreData详解/">展开全文 >></a>
         </p>
       
 
@@ -237,25 +275,10 @@
 <ul>
 <li>苹果开发者帐号：苹果开发者帐号分为个人帐号、公司帐号、企业帐号、教育机构帐号，个人帐号和公司帐号99美元/年，个人帐号只能个人使用；公司帐号能建立团队，通过团队和权限管理的方式来使用，方便多人协作；企业帐号299美元/年，企业帐号不能发布app到appstore，不限制设备个数，主要用来内部发布应用；教育账号为苹果开发者计划授权机构，不需要支付费用，app也只能在内部使用，无法对外正式发布</li>
 <li>Certification(证书)：用来验证iOS App内容（executable code）的合法性和完整性的数字证书。对于想安装到真机或发布到AppStore的应用程序（App），只有经过签名验证（Signature Validated）才能确保来源可信，并且保证App内容是完整、未经篡改的。证书又分为Developer Certification(开发证书)和Distribution Certification(发布证书)，开发证书用来在电脑上的开发测试，可以生成多个副本供多人使用；发布证书用来打包生成ipa上传到Appstore，可以制作测试版或者发布版本，只有配置的电脑可以使用，可以到处p12文件供他人使用。</li>
-<li>Provisioning Profile(授权文件)：包含App ID、设备UDID和证书，保证app的完整性，同时验证app id和bundle id是否一致，并确保该设备授权运行该app</li>
-</ul>
-<h3 id="iOS打包上传基本流程"><a href="#iOS打包上传基本流程" class="headerlink" title="iOS打包上传基本流程"></a>iOS打包上传基本流程</h3><p>简单总结下iOS打包上传Appstore基本流程：</p>
-<ol>
-<li>使用xcode clean工程，然后选择项目的release版本的配置</li>
-<li>选择菜单栏product archive进行打包</li>
-<li>打包成功后会进入打包选择界面</li>
-<li>选中打好的包，然后选择右边菜单中的export，选择要导出的包类型和相应的证书后即可</li>
-<li>根据类型，如果是内测版本，直接上传到相应内测平台即可；如果是发布版本使用xcode自带的application loader即可将ipa包上传到iTunes connect</li>
-<li>iTunes connect验证通过后，即可根据网站提示填写相关信息和图片，然后选择刚验证通过的构建版本提交审核（其中填写版本更新信息可以等待审核通过后再任意修改）</li>
-<li>审核通过后即可选择发布，发布成功后大概半小时以后可在Appstore看到新版本的app<br>在这个过程中可能碰到各种各样的错误，根据提示或者网络搜索一步一步解决错误。</li>
-</ol>
-<h3 id="iOS打包上传错误记录"><a href="#iOS打包上传错误记录" class="headerlink" title="iOS打包上传错误记录"></a>iOS打包上传错误记录</h3><ol>
-<li>项目中使用xib或者storyboard，打包出现”Internal error.Please file a bug at bugreport.apple.com and attatch”错误，cmd + shift + k然后 cmd + option + shift + k即可解决</li>
-<li>项目archive后export选择证书后提示”Your account already has a valid iOS Distribution certificate!”错误，只能在发布mac上面使用发布证书来打包，或者revoke之前的证书，重新生成证书来打包（revoke证书的操作非常危险，会让所有其它所有正在使用该证书的地方失效，需要重新申请，因此这个操作需要慎重再慎重，确保只有自己使用时才可以这么操作）</li>
-<li>上传过程提示version版本过低，项目中version对应上传到iTunes connect的版本号，build的版本对应再Appstore中显示的版本号，因此每次重新上传到iTunes connect时，version版本号必须递增，version和build不需要一一对应，version可以使用一个长整数</li>
-<li>使用application loader上传时出现” ERROR ITMS-90534: Invalid Toolchain. New apps and app updates must be built with the public (GM) versions of Xcode 6 or later, macOS, and iOS SDK or later. Don’t submit apps built with beta software including beta macOS builds.”错误，根据提示使用正式版本的8.3.2版本的Xcode重新打包后正常上传</li>
-</ol>
-
+<li>Provisioning Profile(授权文件)：包含App ID、设备UDID和证书，保证app的完整性，同时验证app id和bundle id是否一致，并确保该设备授权运行该app</li></ul>
+        
+          <a class="article-more-a" href="/2018/01/24/iOS打包遇到错误解决和记录/#more">more >></a>
+        
       
 
       
@@ -417,6 +440,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">打包错误</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">数据持久化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
             
             <div class="clearfix"></div>

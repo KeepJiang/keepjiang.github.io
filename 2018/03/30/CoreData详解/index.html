@@ -6,15 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | KeepJiang&#39;s blog</title>
+  <title>CoreData详解 | KeepJiang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="iOS,OC,开发者,程序猿,编程,代码,开源,IT网站,Developer,Programmer,Coder">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KeepJiang&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="记录学习的点点滴滴。">
+<meta name="keywords" content="iOS, CoreData, 数据持久化, 数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CoreData详解">
+<meta property="og:url" content="http://yoursite.com/2018/03/30/CoreData详解/index.html">
 <meta property="og:site_name" content="KeepJiang&#39;s blog">
+<meta property="og:description" content="记录学习的点点滴滴。">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15215371819279.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15223836030979.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15215986018864.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15215994247012.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15216002000838.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15216026345134.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15220613279698.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15223040382911.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15223761915169.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15223703388014.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15223856029283.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/30/CoreData详解/15223272599772.jpg">
+<meta property="og:updated_time" content="2018-03-30T08:34:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KeepJiang&#39;s blog">
+<meta name="twitter:title" content="CoreData详解">
+<meta name="twitter:description" content="记录学习的点点滴滴。">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/30/CoreData详解/15215371819279.jpg">
   
     <link rel="alternative" href="/atom.xml" title="KeepJiang&#39;s blog" type="application/atom+xml">
   
@@ -144,36 +161,326 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-CoreData详解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/30/CoreData详解/" class="archive-article-date">
-  	<time datetime="2018-03-30T12:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/30/CoreData详解/">CoreData详解</a>
+    <h1 class="article-title" itemprop="name">
+      CoreData详解
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/03/30/CoreData详解/" class="archive-article-date">
+  	<time datetime="2018-03-30T12:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>CoreData</strong>是Apple官方为iOS提供的一个数据持久化方案，其本质是一个通过封装底层数据操作，让程序员以面向对象的方式存储和管理数据的ORM框架（Object-Relational Mapping：对象-关系映射，简称ORM）。虽然底层支持SQLite、二进制数据、xml等多种文件存储，但是主要还是用来操作SQLite数据库。<br>程序员不需要学习或者使用SQL语句，只需要使用<strong>CoreData</strong>框架提供的对象和接口以及图形化工具，即可完成SQLite数据库的创建、表关系、增删改查等一系列操作，在一定程度上降低了程序员的学习成本并增加了代码的统一性和可阅读性。</p>
+</blockquote>
+<h3 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h3><p><strong>CoreData</strong>作为一个ORM框架，需要解决实体对象和数据库数据的映射关系，将OC对象转化为数据，保存到SQLite文件中，同时能将保存在数据库中的数据还原成OC对象。概要结构如下：<br><img src="/2018/03/30/CoreData详解/15215371819279.jpg"></p>
+<p><strong>CoreData</strong>主要包含以下几个类：</p>
+<ul>
+<li><strong>NSManagedObjectModel</strong>：托管对象模型，映射实体类和数据库数据的关系，本质是一个XML文件，后面简称<strong>MOM</strong></li>
+<li><strong>NSManagedObject</strong>：托管对象，对应数据库数据的实体，后面简称<strong>MO</strong></li>
+<li><strong>NSManagedObjectContext</strong>：托管对象上下文，管理托管对象，后面简称<strong>MOC</strong></li>
+<li><strong>NSPersistentStoreCoordinator</strong>：持久化存储调度器，用来处理磁盘持久化数据和实体类对象的相互转化，后面简称<strong>PSC</strong></li>
+<li><strong>NSPersistentStore</strong>：持久化存储器，负责磁盘持久化数据存取，后面简称<strong>PS</strong><a id="more"></a>
+<strong>CoreData</strong>的总体框架如下图：<img src="/2018/03/30/CoreData详解/15223836030979.jpg">
+</li>
+</ul>
+<p>在上层通过<strong>MOC</strong>操作对应的托管对象，然后<strong>MOC</strong>会将操作传递给<strong>PSC</strong>，<strong>PSC</strong>通过托管对象模型中的映射关系，再将托管对象的操作转化为对底层数据的操作，进行数据存取操作。</p>
+<h5 id="CoreData使用流程"><a href="#CoreData使用流程" class="headerlink" title="CoreData使用流程"></a>CoreData使用流程</h5><p>1、创建和配置模型文件<br>a. 新建项目是勾选Use CoreData，xcode会自动创建『XXX.xcdatamodeld』的模型文件；<br><img src="/2018/03/30/CoreData详解/15215986018864.jpg"><br>b. 如果新建项目时未勾选，可以通过新建文件手动创建；<br><img src="/2018/03/30/CoreData详解/15215994247012.jpg"><br>c. 通过图形化工具即可配置实体类和数据库表的映射，实体类之间的关系，以及简单的查询策略；<br><img src="/2018/03/30/CoreData详解/15216002000838.jpg"><br>d. 配置好模型文件后，xcode8版本之前需要手动生成实体类，<strong>选中entity -&gt; 菜单栏Editor -&gt; Create NSManagedObject SubClass</strong>即可手动生成托管实体类。xcode8版本以后会自动生成实体类，默认在项目中不会显示。如果想要查看实体类结构，可以在模型文件中配置『Codegen』为『Manual/None』，然后再手动生成，否则会存在两份实体类，编译报错；<br>e. 对应每个实体类会使用<strong>catogory</strong>的方式生成如图4个文件，继承自<strong>NSManagedObject</strong>，托管实体类的属性用<strong>@dynamic</strong>修饰，CoreData框架会在运行时动态生成存取方法；<br><img src="/2018/03/30/CoreData详解/15216026345134.jpg"><br>f. 这样就完成了数据模型文件创建和简单使用，在代码中初始化即可使用。<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    - (NSManagedObjectModel *)managedObjectModel&#123;</span><br><span class="line">    if (nil == _managedObjectModel) &#123;</span><br><span class="line">        /**</span><br><span class="line">         *从包的根目录获取到模型文件的url，然后通过模型文件初始化managedObjectModel</span><br><span class="line">         *模型文件的后缀名和在工程中看到的不一样，工程中为@“xcdatamodeld”，真实为@“momd”</span><br><span class="line">         *模型文件本质上是一个苹果自定义的xml文件</span><br><span class="line">         */</span><br><span class="line">        NSURL *url = [[NSBundle mainBundle] URLForResource:@&quot;LearnCoreData&quot;</span><br><span class="line">                                             withExtension:@&quot;momd&quot;];</span><br><span class="line">        _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];</span><br><span class="line">    &#125;</span><br><span class="line">    return _managedObjectModel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、使用数据模型<strong>MOM</strong>初始化持久化存储调度器<strong>PSC</strong>，然后使用持久化存储类型和路径配置持久存储器<strong>PS</strong>，最后将<strong>PS</strong>添加到<strong>PSC</strong>即可。</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">- (NSPersistentStoreCoordinator *)psCoordinator&#123;</span><br><span class="line">    if (nil == _psCoordinator) &#123;</span><br><span class="line">        //1.使用数据模型初始化</span><br><span class="line">        _psCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];</span><br><span class="line">        //2.配置底层文件名和保存路径</span><br><span class="line">        NSString *homePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;</span><br><span class="line">        NSURL *pathURL = [NSURL fileURLWithPath:[homePath stringByAppendingPathComponent:@&quot;learnCoreData.sql&quot;]];</span><br><span class="line">        //3.配置持久化数据存储类型和路径</span><br><span class="line">        [_psCoordinator addPersistentStoreWithType:NSSQLiteStoreType</span><br><span class="line">                                     configuration:nil</span><br><span class="line">                                               URL:pathURL</span><br><span class="line">                                           options:nil</span><br><span class="line">                                             error:nil];</span><br><span class="line">    &#125;</span><br><span class="line">    return _psCoordinator;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>3、初始化托管对象上下文<strong>MOC</strong>，并配置队列的类型，队列类型是一个枚举值，跟CoreData多线程相关（后文会详细介绍），有三种类型：</p>
+<pre><code>* NSMainQueueConcurrencyType：主并发队列，UI相关操作建议使用该队列
+* NSPrivateQueueConcurrencyType：私有并发队列，会在子线程执行操作，耗时操作建议使用
+* NSMainQueueConcurrencyType：已废弃
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (NSManagedObjectContext *)managedOC&#123;</span><br><span class="line">    if (nil == _managedOC) &#123;</span><br><span class="line">        //初始化ManagedObjectContext并选择类型</span><br><span class="line">        _managedOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];</span><br><span class="line">        _managedOC.persistentStoreCoordinator = self.psCoordinator;</span><br><span class="line">    &#125;</span><br><span class="line">    return _managedOC;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>4、将<strong>MOC</strong>和<strong>PSC</strong>关联，即完成了CoreData的初始化和配置工作。</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><h5 id="输出SQL语句日志"><a href="#输出SQL语句日志" class="headerlink" title="输出SQL语句日志"></a>输出SQL语句日志</h5><p>使用CoreData操作数据库，默认是没有底层操作数据库的相关SQL语句的，可以通过配置project -&gt; schema -&gt; edit schema - run开启，如下图：<br><img src="/2018/03/30/CoreData详解/15220613279698.jpg"></p>
+<h5 id="数据库插入操作"><a href="#数据库插入操作" class="headerlink" title="数据库插入操作"></a>数据库插入操作</h5><ol>
+<li>使用NSEntityDescription类工厂方法传入要插入的托管对象类和指定托管对象所在的上下文获取到托管对象<strong>MO</strong></li>
+<li>对<strong>MO</strong>进行赋值</li>
+<li>调用当前<strong>MOC</strong>的save方法就可以完成数据库的插入操作</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 使用CoreData进行数据库插入</span><br><span class="line"> */</span><br><span class="line">- (void)coreDataInsert&#123;</span><br><span class="line">    for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">        //+insertNewObjectForEntityForName:inManagedObjectContext:</span><br><span class="line">        //工厂方法，根据给定的 Entity 描述，利用反射生成相应的 NSManagedObject 对象，并插入到 ManagedObjectContext 中</span><br><span class="line">        Student *student = [NSEntityDescription insertNewObjectForEntityForName:@&quot;Student&quot;</span><br><span class="line">                                                         inManagedObjectContext:self.managedOC];</span><br><span class="line">        student.studentId = i;</span><br><span class="line">        student.studentName = [NSString stringWithFormat:@&quot;student%d&quot;, i];</span><br><span class="line">        student.studentSex = i % 2;</span><br><span class="line">        NSError *error;</span><br><span class="line">        //调用MOC的save方法将内存中托管对象变化同步到底层数据库中</span><br><span class="line">        if ([self.managedOC hasChanges]) &#123;</span><br><span class="line">            [self.managedOC save:&amp;error];</span><br><span class="line">            if (error) &#123;</span><br><span class="line">                [self logError:error];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="数据库删除操作"><a href="#数据库删除操作" class="headerlink" title="数据库删除操作"></a>数据库删除操作</h5><ol>
+<li>直接调用托管对象上下文<strong>MOC</strong>删除管理的托管对象即可完成数据库记录的删除操作</li>
+<li>正常情况下，当前是没有要删除的托管对象的，因此需要先调用查询找到要删除的<strong>MO</strong>，然后调用删除</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 使用CoreData进行数据库删除</span><br><span class="line"> */</span><br><span class="line">- (void)coreDataDelete&#123;</span><br><span class="line">    //1.调用NSFetchRequest的方法指定要删除的类，同样使用了反射机制</span><br><span class="line">    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">    //2.设置谓词，定义查询条件，这里自定id为『1』的Student</span><br><span class="line">    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;studentId = %d&quot;, 1];</span><br><span class="line">    //2.1 将通过谓词自定的查询条件赋给查询请求</span><br><span class="line">    fetchRequest.predicate = predicate;</span><br><span class="line">    //3.使用MOC查询到要删除的MO</span><br><span class="line">    NSError *error;</span><br><span class="line">    NSArray *delStudents = [self.managedOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line">    [self logError:error];</span><br><span class="line">    //4.调用MOC的删除方法进行删除</span><br><span class="line">    for (Student *student in delStudents) &#123;</span><br><span class="line">        [self.managedOC deleteObject:student];</span><br><span class="line">    &#125;</span><br><span class="line">    //5.调用MOC的save方法将内存中托管对象变化同步到底层数据库中</span><br><span class="line">    if ([self.managedOC hasChanges]) &#123;</span><br><span class="line">        [self.managedOC save:&amp;error];</span><br><span class="line">        [self logError:error];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="数据库更新操作"><a href="#数据库更新操作" class="headerlink" title="数据库更新操作"></a>数据库更新操作</h5><p>使用<strong>CoreData</strong>进行数据库更新操作和删除很类似：</p>
+<ol>
+<li>首先通过查询获取到要更新的托管对象</li>
+<li>直接对托管对象进行处理</li>
+<li>将托管对象的更新操作保存到数据库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 使用CoreData进行数据库更新</span><br><span class="line"> */</span><br><span class="line">- (void)coreDataUpdate&#123;</span><br><span class="line">    //1.调用NSFetchRequest的方法指定要查询的类，同样使用了反射机制</span><br><span class="line">    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">    //2.设置谓词，定义查询条件，这里自定id为『1』的Student</span><br><span class="line">    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;studentId = %d&quot;, 1];</span><br><span class="line">    //2.1 将通过谓词自定的查询条件赋给查询请求</span><br><span class="line">    fetchRequest.predicate = predicate;</span><br><span class="line">    //3.使用MOC查询到要更新的MO</span><br><span class="line">    NSError *error;</span><br><span class="line">    NSArray *upDateStudents = [self.managedOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line">    [self logError:error];</span><br><span class="line">    //4.直接对MO进行更新</span><br><span class="line">    for (Student *student in upDateStudents) &#123;</span><br><span class="line">        student.studentName = @&quot;student Special&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    //5.调用MOC的save方法将内存中托管对象变化同步到底层数据库中</span><br><span class="line">    if ([self.managedOC hasChanges]) &#123;</span><br><span class="line">        [self.managedOC save:&amp;error];</span><br><span class="line">        [self logError:error];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="数据库查询操作"><a href="#数据库查询操作" class="headerlink" title="数据库查询操作"></a>数据库查询操作</h5><p><strong>CoreData</strong>将查询操作进行了很好的封装，不需要使用SQL语句，使用<strong>NSFetchRequest</strong>（查询请求）和<strong>NSPredicate</strong>（谓词）来完成查询：</p>
+<ol>
+<li>通过<strong>NSFetchRequest</strong>指定要查询的类</li>
+<li>通过<strong>NSPredicate</strong>指定查询条件</li>
+<li>调用<strong>MOC</strong>执行查询请求即可完成查询</li>
+<li><strong>NSFetchRequest</strong>提供了参数resultType，是一个枚举类型，可以通过这个参数，设置执行fetch操作后返回的数据类型：<ul>
+<li>NSManagedObjectResultType: 返回值是<strong>MO</strong>的子类，也就是托管对象，这是默认选项</li>
+<li>NSManagedObjectIDResultType: 返回NSManagedObjectID类型的对象，也就是<strong>NSManagedObject</strong>的ID，对内存占用比较小。<strong>MOC</strong>可以通过NSManagedObjectID对象获取对应的托管对象</li>
+<li>NSDictionaryResultType: 返回字典类型对象</li>
+<li>NSCountResultType: 返回请求结果的count值，不会加载托管对象到内存</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 使用CoreData进行数据库查询</span><br><span class="line"> */</span><br><span class="line">- (void)coreDataQuery&#123;</span><br><span class="line">    NSFetchRequest *fetchRequest = [Student fetchRequest];</span><br><span class="line">    NSError *error;</span><br><span class="line">    NSArray *students = [self.managedOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line">    [students enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">        Student *student = (Student *)obj;</span><br><span class="line">        NSLog(@&quot;Student:&lt;id: %d, name : %@, sex : %@&gt;&quot;, student.studentId, student.studentName, student.studentSex == 0 ? @&quot;男&quot; : @&quot;女&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用进阶"><a href="#使用进阶" class="headerlink" title="使用进阶"></a>使用进阶</h3><h5 id="数据库复杂查询"><a href="#数据库复杂查询" class="headerlink" title="数据库复杂查询"></a>数据库复杂查询</h5><p>上一节在初始化<strong>CoreData</strong>堆栈后，使用<strong>MO</strong>和<strong>MOC</strong>，配合<strong>NSFetchRequest</strong>和<strong>NSPredicate</strong>即可完成数据库的基本增删改查操作，这一节介绍基于CoreData的复杂查询，而查询的关键在于熟悉和使用<strong>NSPredicate</strong>。</p>
+<h6 id="NSPredicate"><a href="#NSPredicate" class="headerlink" title="NSPredicate"></a>NSPredicate</h6><p>官方的解释:<br><em>The NSPredicate class is used to define logical conditions used to constrain a search either for a fetch or for in-memory filtering.</em></p>
+<p>NSPredicate类是用来定义逻辑条件约束的获取或内存中的过滤搜索，支持的基本运算如下：</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=或==</td>
+<td>判断是否相等</td>
+</tr>
+<tr>
+<td>&lt;=，=&lt;</td>
+<td>左边小于等于右边</td>
+</tr>
+<tr>
+<td>&gt;=，=&gt;</td>
+<td>左边大于等于右边</td>
+</tr>
+<tr>
+<td>&gt;或&lt;</td>
+<td>大于或小于</td>
+</tr>
+<tr>
+<td>!=、&lt;&gt;</td>
+<td>不相等</td>
+</tr>
+<tr>
+<td>BETWEEN</td>
+<td>在区间内</td>
+</tr>
+<tr>
+<td>BEGINSWITH</td>
+<td>字符串以指定开头</td>
+</tr>
+<tr>
+<td>ENDSWITH</td>
+<td>字符串以指定结尾</td>
+</tr>
+<tr>
+<td>CONTAINS</td>
+<td>包含指定字符串</td>
+</tr>
+<tr>
+<td>LIKE</td>
+<td>是否匹配指定模板，用来模糊匹配，例如”name LIKE ‘<em>ab</em>’”或”name LIKE ‘?ab*’”</td>
+</tr>
+<tr>
+<td>MATCHES</td>
+<td>检查某个字符串是否匹配指定的正则表达式</td>
+</tr>
+<tr>
+<td>ANY、SOME</td>
+<td>集合中任意一个元素满足条件，就返回YES</td>
+</tr>
+<tr>
+<td>ALL</td>
+<td>集合中所有元素都满足条件，返回YES</td>
+</tr>
+<tr>
+<td>NONE</td>
+<td>集合中是否没有元素</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>等价于SQL语句中的IN运算符</td>
+</tr>
+<tr>
+<td>SELF</td>
+<td>代表正在被判断的对象自身</td>
+</tr>
+</tbody>
+</table>
+<h6 id="模糊和多条件查询"><a href="#模糊和多条件查询" class="headerlink" title="模糊和多条件查询"></a>模糊和多条件查询</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 模糊和多条件查询</span><br><span class="line">*/</span><br><span class="line">- (void)queryMatch&#123;</span><br><span class="line">    //模糊查询</span><br><span class="line">    NSFetchRequest *fetchRequest = [Student fetchRequest];</span><br><span class="line">    //使用通配符做匹配</span><br><span class="line">    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;studentName LIKE %@ AND studentSex = %d&quot;, @&quot;student*&quot;, 0];</span><br><span class="line">    fetchRequest.predicate = predicate;</span><br><span class="line">    NSError *error;</span><br><span class="line">    NSArray *students = [self.managedOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line">    [students enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">        Student *student = (Student *)obj;</span><br><span class="line">        NSLog(@&quot;Student:&lt;id: %d, name : %@, sex : %@&gt;&quot;, student.studentId, student.studentName, student.studentSex == 0 ? @&quot;男&quot; : @&quot;女&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="排序和分页"><a href="#排序和分页" class="headerlink" title="排序和分页"></a>排序和分页</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 查询排序和分页</span><br><span class="line"> */</span><br><span class="line">- (void)querySort&#123;</span><br><span class="line">    //1.利用字符串反射，指定要查询的托管对象</span><br><span class="line">    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">    //2.指定分页的开始下标</span><br><span class="line">    fetchRequest.fetchOffset = (self.pageOffset++) * pageNum;</span><br><span class="line">    //3.指定每页大小</span><br><span class="line">    fetchRequest.fetchLimit = pageNum;</span><br><span class="line">    //4.使用NSSortDescriptor对象设置排序的字段和升降序</span><br><span class="line">    //id降序</span><br><span class="line">    NSSortDescriptor *sortIdDescriptor = [NSSortDescriptor sortDescriptorWithKey:@&quot;studentId&quot; ascending:NO];</span><br><span class="line">    //性别升序</span><br><span class="line">    NSSortDescriptor *sortSexDescriptor = [NSSortDescriptor sortDescriptorWithKey:@&quot;studentSex&quot; ascending:YES];</span><br><span class="line">    fetchRequest.sortDescriptors = @[sortIdDescriptor, sortSexDescriptor];</span><br><span class="line">    //5.调用MOC执行查询</span><br><span class="line">    NSError *error;</span><br><span class="line">    NSArray *students = [self.managedOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line">    //6.打印查询结果</span><br><span class="line">    [self logError:error];</span><br><span class="line">    [self logQueryResults:students];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 打印查询结果</span><br><span class="line"> @param students students </span><br><span class="line"> */</span><br><span class="line">- (void)logQueryResults:(NSArray *)students&#123;</span><br><span class="line">    [students enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">        Student *student = (Student *)obj;</span><br><span class="line">        NSLog(@&quot;Student:&lt;id: %d, name : %@, sex : %@&gt;&quot;, student.studentId, student.studentName, student.studentSex == 0 ? @&quot;男&quot; : @&quot;女&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h5><p>在<strong>CoreData</strong>中操作大量数据时，如果将大量<strong>MO</strong>加载到内存再进行数据更新，会占用大量内存，在移动设备有限的内存上明显会造成瓶颈，因此在iOS8 增加了”Batch Updates”，又在 iOS9 增加了”Batch Deletions”，其根本思路是绕开使用<strong>MOC</strong>将数据全部加载到内存而直接进行底层数据库操作。</p>
+<h6 id="批量更新"><a href="#批量更新" class="headerlink" title="批量更新"></a>批量更新</h6><ol>
+<li>使用批量更新<strong>NSBatchUpdateResult</strong>，指定要批量更新的MO，即数据库表</li>
+<li>初始化查询条件</li>
+<li>通过配置<strong>propertiesToUpdate</strong>批量修改的属性和和要修改的值，为一个dictionary</li>
+<li>设置批量更新放回的结果集类型,设置后返回结果会存到<strong>NSBatchUpdateResult</strong>的result属性中<ul>
+<li><strong>NSStatusOnlyResultType</strong> :默认值，只返回批量更新的结果 YES：成功 / NO : 失败</li>
+<li><strong>NSUpdatedObjectIDsResultType</strong> :返回批量更新后的MO的id数组</li>
+<li><strong>NSUpdatedObjectsCountResultType</strong> :返回批量更新后的数量</li>
+</ul>
+</li>
+<li>调用MOC执行批量更新操作，并获取结果。由于批量更新会绕过<strong>MOC</strong>直接进行数据库操作，因此需要重新执行查询或手动同步数据变化到<strong>MOC</strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">批量更新</span><br><span class="line">*/</span><br><span class="line">- (void)batchUpdate&#123;</span><br><span class="line">//1.使用批量更新request，指定要批量更新的MO，即数据库表</span><br><span class="line">NSBatchUpdateRequest *batchUpdateRequest = [NSBatchUpdateRequest batchUpdateRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">//2.初始化查询条件</span><br><span class="line">NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;studentSex = %d&quot;, 0];</span><br><span class="line">batchUpdateRequest.predicate = predicate;</span><br><span class="line">//3.通过配置propertiesToUpdate批量修改的属性和和要修改的值，为一个dictionary</span><br><span class="line">batchUpdateRequest.propertiesToUpdate = @&#123;@&quot;studentName&quot; : @&quot;student&quot;, @&quot;studentSex&quot; : @(1)&#125;;</span><br><span class="line">batchUpdateRequest.resultType = NSUpdatedObjectIDsResultType;</span><br><span class="line">//3.1可以设置批量更新放回的结果集类型,设置后返回结果会存到NSBatchUpdateResult的result属性中</span><br><span class="line">/**</span><br><span class="line"> *NSStatusOnlyResultType          :默认值，只返回批量更新的结果 YES：成功 / NO : 失败</span><br><span class="line"> *NSUpdatedObjectIDsResultType    :返回批量更新后的MO id数组</span><br><span class="line"> *NSUpdatedObjectsCountResultType :返回批量更新后的数量</span><br><span class="line"> */</span><br><span class="line">//4.调用MOC执行批量更新操作</span><br><span class="line">NSError *error;</span><br><span class="line">//4.1获取批量更新的结果</span><br><span class="line">NSBatchUpdateResult *batchUpdateResult = [self.managedOC executeRequest:batchUpdateRequest error:&amp;error];</span><br><span class="line">if (error) &#123;</span><br><span class="line">    [self logError:error];</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    NSLog(@&quot;批量更新成功&quot;);</span><br><span class="line">    //4.2获取到批量更新的id数组</span><br><span class="line">    id managedObjectIds = batchUpdateResult.result;</span><br><span class="line">    //4.3遍历id数组</span><br><span class="line">    for (id managedObjectId in managedObjectIds) &#123;</span><br><span class="line">        //4.4通过id获取到托管对象</span><br><span class="line">        NSManagedObject *managedObject = [self.managedOC objectWithID:managedObjectId];</span><br><span class="line">        if (managedObject) &#123;</span><br><span class="line">            __weak typeof(self) weakSelf = self;</span><br><span class="line">            [self.managedOC performBlock:^&#123;</span><br><span class="line">                //4.5合并数据更新到托管对象</span><br><span class="line">                [weakSelf.managedOC refreshObject:managedObject mergeChanges:YES];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     [self queryAll];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="批量删除"><a href="#批量删除" class="headerlink" title="批量删除"></a>批量删除</h6><ol>
+<li>初始化批量删除request，系统提供两种初始化方法<ul>
+<li><strong>initWithFetchRequest:</strong> 通过fetchRequest设置要删除的数据，需要先初始化fetchRequest指定要删除的数据</li>
+<li><strong>initWithObjectIDs:</strong> 使用要删除的托管对象的id来指定要删除的数据，需要先查询出删除对象的id数组</li>
+</ul>
+</li>
+<li>和批量更新一样，可以指定批量删除的操作结果<ul>
+<li><strong>NSStatusOnlyResultType</strong> :默认值，只返回批量删除的结果 YES：成功 / NO : 失败</li>
+<li><strong>NSUpdatedObjectIDsResultType</strong> :返回批量删除更新后的MO的id数组，用来同步变化到<strong>MOC</strong></li>
+<li><strong>NSUpdatedObjectsCountResultType</strong> :返回批量删除后的数量 </li>
+</ul>
+</li>
+<li>根据操作结果进行相关操作</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 批量删除</span><br><span class="line"> */</span><br><span class="line">- (void)batchDelete&#123;</span><br><span class="line">    //1.指定查询的类</span><br><span class="line">    NSFetchRequest *fetchRequest = [Student fetchRequest];</span><br><span class="line">    //2.初始化批量删除request，并通过fetchRequest设置要删除的数据</span><br><span class="line">    NSBatchDeleteRequest *batchDeleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];</span><br><span class="line">    //3.指定批量删除的操作结果</span><br><span class="line">    batchDeleteRequest.resultType = NSStatusOnlyResultType;</span><br><span class="line">    NSError *error;</span><br><span class="line">    NSBatchDeleteResult *batchDeleteResult = [self.managedOC executeRequest:batchDeleteRequest error:&amp;error];</span><br><span class="line">    if ([batchDeleteResult.result boolValue]) &#123;</span><br><span class="line">        NSLog(@&quot;批量删除成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="批量读取"><a href="#批量读取" class="headerlink" title="批量读取"></a>批量读取</h6><p>平常使用CoreData进行查询操作时，使用NSFetchRequest，并调用<strong>MOC</strong>的<strong>executeFetchRequest:error:</strong>方法，会更新<strong>MOC</strong>管理的<strong>MO</strong>，然后直接执行并返回结果集。这个过程是同步的，会阻塞当前的<strong>MOC</strong>。<br>针对该问题，iOS增加了Asynchronous Fetching查询方法，执行后不会马上返回执行后的结果，并且不会阻塞当前的<strong>MOC</strong>，测试发现会先执行其它的数据库操作，操作完后执行异步查询。最后执行完后会执行回调block，暂时未发现这种方式的引用场景。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 异步查询</span><br><span class="line"> */</span><br><span class="line">- (void)asynchronousFetching&#123;</span><br><span class="line">    //1.通过NSFetchRequest指定要查询的托管对象</span><br><span class="line">    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">    //2.使用NSFetchRequest初始化NSAsynchronousFetchRequest，指定批量查询的数据，并设置查询完成的回调</span><br><span class="line">    NSAsynchronousFetchRequest *asynchronousFetchRequest = [[NSAsynchronousFetchRequest alloc] initWithFetchRequest:fetchRequest completionBlock:^(NSAsynchronousFetchResult * _Nonnull asynchronousFetchResult) &#123;</span><br><span class="line">        if (asynchronousFetchResult.finalResult) &#123;</span><br><span class="line">            NSLog(@&quot;批量查询结果:%@&quot;, asynchronousFetchResult.finalResult);</span><br><span class="line">            NSArray *students = asynchronousFetchResult.finalResult;</span><br><span class="line">            NSLog(@&quot;Students: %@&quot;, students);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;];</span><br><span class="line">    //3.调用MOC执行异步查询</span><br><span class="line">    NSError *error;</span><br><span class="line">    NSAsynchronousFetchResult *asynchronousFetchResult = [self.managedOC executeRequest:asynchronousFetchRequest error:&amp;error];</span><br><span class="line">    //4.调用普通查询</span><br><span class="line">    [self queryAll];</span><br><span class="line">    //5.调用模糊查询</span><br><span class="line">    [self queryMatch];</span><br><span class="line">    //6.根据打印发现，虽然异步查询在前，但是后最后执行，不会阻塞当前的MOC</span><br><span class="line">    NSLog(@&quot;result；%@&quot;, asynchronousFetchResult.finalResult);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="高级特性"><a href="#高级特性" class="headerlink" title="高级特性"></a>高级特性</h3><h5 id="NSFetchedResultsController"><a href="#NSFetchedResultsController" class="headerlink" title="NSFetchedResultsController"></a>NSFetchedResultsController</h5><p><strong>NSFetchedResultsController</strong>（后面简称<strong>FRC</strong>）从命名看很像是一个Controller，其实不然。<strong>FRC</strong>是CoreData提供给UITableView或UICollectionView跟底层持久化数据交互的控制器（胶水代码），类似数据源管理的角色。结构如下：<br><img src="/2018/03/30/CoreData详解/15223040382911.jpg"></p>
+<p><strong>NSFetchedResultsController</strong>绑定一个<strong>MOC</strong>后，当该<strong>MOC</strong>进行save操作将数据存储到底层时，如果判断是IUD（I:Insert、U:Update、D:Delete）操作，则会通知绑定的<strong>FRC</strong>触发相应的回调方法。</p>
+<h6 id="NSFetchedResultsController基本使用"><a href="#NSFetchedResultsController基本使用" class="headerlink" title="NSFetchedResultsController基本使用"></a>NSFetchedResultsController基本使用</h6><ol>
+<li>使用fetchRequest指定要查询的数据表</li>
+<li>使用NSSortDescriptor指定查询后的排序条件</li>
+<li>使用fetchRequest初始化<strong>FRC</strong>并绑定<strong>MOC</strong></li>
+<li>在合适的位置调用<strong>FRC</strong>执行查询获取数据</li>
+<li>设置<strong>FRC</strong>的代理，在代理方法中做处理</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">//初始化FRC</span><br><span class="line">- (NSFetchedResultsController *)fetchedResultsController&#123;</span><br><span class="line">    if (nil == _fetchedResultsController) &#123;</span><br><span class="line">        //1.使用fetchRequest指定要查询的数据表</span><br><span class="line">        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">        fetchRequest.fetchLimit = 50;</span><br><span class="line">        fetchRequest.fetchOffset = 0;</span><br><span class="line">        //2.使用NSSortDescriptor指定查询后的排序条件</span><br><span class="line">        NSSortDescriptor *sortDescroptorName = [NSSortDescriptor sortDescriptorWithKey:@&quot;grade.gradeName&quot;</span><br><span class="line">                                                                         ascending:YES];</span><br><span class="line">        NSSortDescriptor *sortDescroptorId = [NSSortDescriptor sortDescriptorWithKey:@&quot;studentId&quot;</span><br><span class="line">                                                                             ascending:YES];</span><br><span class="line">        fetchRequest.sortDescriptors = @[sortDescroptorName, sortDescroptorId];</span><br><span class="line">        //3.使用fetchRequest初始化NSFetchedResultsController</span><br><span class="line">        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest</span><br><span class="line">                                                                        managedObjectContext:self.appDelegate.managedOC</span><br><span class="line">                                                                          sectionNameKeyPath:@&quot;grade.gradeName&quot;</span><br><span class="line">                                                                                   cacheName:nil];</span><br><span class="line">    &#125;</span><br><span class="line">    return _fetchedResultsController;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 使用FRC执行查询</span><br><span class="line"> */</span><br><span class="line">- (void)executeFRCFetch&#123;</span><br><span class="line">    NSError *error;</span><br><span class="line">    if (![self.fetchedResultsController performFetch:&amp;error]) &#123;</span><br><span class="line">        NSLog(@&quot;查询失败：%@&quot;, error);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        NSLog(@&quot;查询成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="结合UITableView使用"><a href="#结合UITableView使用" class="headerlink" title="结合UITableView使用"></a>结合UITableView使用</h6><p><strong>FRC</strong>本身就是针对UITableView和UICollectionView封装的，接下来结合UITableView描述如何使用。当<strong>MOC</strong>进行数据库操作时，如果是<strong>IDU</strong>操作时，触发<strong>FRC</strong>相应回调，执行代理方法并传递相应变化类型。类型如下：</p>
+<ul>
+<li>NSFetchedResultsChangeInsert：绑定的<strong>MOC</strong>的托管对象出现插入变化</li>
+<li>NSFetchedResultsChangeDelete：绑定的<strong>MOC</strong>的托管对象出现删除变化</li>
+<li>NSFetchedResultsChangeMove：绑定的<strong>MOC</strong>的托管对象出现移动变化</li>
+<li>NSFetchedResultsChangeUpdate：绑定的<strong>MOC</strong>的托管对象出现更新变化</li>
+</ul>
+<p>结合UITableView和FRC实现增删改移的双向同步操作：<br>1、在Table view data source的代理方法中直接调用<strong>FRC</strong>，返回section数量、标题以及row数量；</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - Table view data source</span><br><span class="line">- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section&#123;</span><br><span class="line">    //FRC中封装好了section数组和section标题</span><br><span class="line">    return self.fetchedResultsController.sections[section].indexTitle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView &#123;</span><br><span class="line">    //FRC中封装好了section数组，返回数组长度</span><br><span class="line">    return self.fetchedResultsController.sections.count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section &#123;</span><br><span class="line">    //FRC中封装好了section数组，直接获取相应section的row数量</span><br><span class="line">    return [self.fetchedResultsController.sections objectAtIndex:section].numberOfObjects;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    //FRC中封装好了直接通过indexPath获取相应的对象</span><br><span class="line">    Student *student = [self.fetchedResultsController objectAtIndexPath:indexPath];</span><br><span class="line">    static NSString *identifier = @&quot;cell&quot;;</span><br><span class="line">    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];</span><br><span class="line">    if (nil == cell) &#123;</span><br><span class="line">        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle</span><br><span class="line">                                      reuseIdentifier:identifier];</span><br><span class="line">    &#125;</span><br><span class="line">    // Configure the cell...</span><br><span class="line">    cell.textLabel.text = student.studentName;</span><br><span class="line">    cell.detailTextLabel.text = student.studentSex == 0 ? @&quot;男&quot; : @&quot;女&quot;;</span><br><span class="line"></span><br><span class="line">    return cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>2、通过UITableView的编辑模式进行cell的删除、拖动操作时，使用<strong>FRC</strong>获取到对应的托管对象，然后进行相应的delete或move操作，并在<strong>FRC</strong>的回调方法中进行相应处理；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// Override to support conditional editing of the table view.</span><br><span class="line">- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    // Return NO if you do not want the specified item to be editable.</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line">// Override to support conditional rearranging of the table view.</span><br><span class="line">- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    // Return NO if you do not want the item to be re-orderable.</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line">// Override to support editing the table view.</span><br><span class="line">- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    if (editingStyle == UITableViewCellEditingStyleDelete) &#123;</span><br><span class="line">        //用户删除cell时，通过indexPath获取到对应的托管对象，将数据同步到底层</span><br><span class="line">        Student *student = [self.fetchedResultsController objectAtIndexPath:indexPath];</span><br><span class="line">        [self.appDelegate.managedOC deleteObject:student];</span><br><span class="line">        NSError *error;</span><br><span class="line">        if (![self.appDelegate.managedOC save:&amp;error]) &#123;</span><br><span class="line">            NSLog(@&quot;删除失败: %@&quot;, error);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125; else if (editingStyle == UITableViewCellEditingStyleInsert) &#123;</span><br><span class="line">        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line">// Override to support rearranging the table view.</span><br><span class="line">- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath &#123;</span><br><span class="line">    //移动cell时，将拖动的cell对应的托管对象数据进行相应修改</span><br><span class="line">    Student *fromStudent = [self.fetchedResultsController objectAtIndexPath:fromIndexPath];</span><br><span class="line">    Student *toStudent = [self.fetchedResultsController objectAtIndexPath:toIndexPath];</span><br><span class="line">    fromStudent.studentId = toStudent.studentId;</span><br><span class="line">    fromStudent.grade = toStudent.grade;</span><br><span class="line">    NSError *error;</span><br><span class="line">    if (![self.appDelegate.managedOC save:&amp;error]) &#123;</span><br><span class="line">        NSLog(@&quot;移动失败: %@&quot;, error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、使用<strong>FRC</strong>绑定的<strong>MOC</strong>进行数据库插入和更新操作，同样会触发<strong>FRC</strong>，执行代理方法；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 数据库增操作</span><br><span class="line"> @param barButtonItem barButtonItem</span><br><span class="line"> */</span><br><span class="line">- (void)addButtonOnClick:(UIBarButtonItem *)barButtonItem&#123;</span><br><span class="line">    Student *student =  [self.fetchedResultsController.fetchedObjects lastObject];</span><br><span class="line">    Student *insertStudent = [NSEntityDescription insertNewObjectForEntityForName:@&quot;Student&quot;</span><br><span class="line">                                                           inManagedObjectContext:self.appDelegate.managedOC];</span><br><span class="line">    int studentId = student.studentId + 1;</span><br><span class="line">    insertStudent.studentId = studentId;</span><br><span class="line">    insertStudent.studentName = [NSString stringWithFormat:@&quot;student%d&quot;, studentId];</span><br><span class="line">//    insertStudent.grade = student.grade;</span><br><span class="line">    insertStudent.studentSex = studentId % 2;</span><br><span class="line">    NSError *error;</span><br><span class="line">    if (![self.appDelegate.managedOC save:&amp;error]) &#123;</span><br><span class="line">        NSLog(@&quot;新增失败: %@&quot;, error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> 数据库更新操作</span><br><span class="line"> @param barButtonItem barButtonItem</span><br><span class="line"> */</span><br><span class="line">- (void)updateButtonOnClick:(UIBarButtonItem *)barButtonItem&#123;</span><br><span class="line">    Student *student =  [self.fetchedResultsController.fetchedObjects firstObject];</span><br><span class="line">    student.studentName = @&quot;test&quot;;</span><br><span class="line">    NSError *error;</span><br><span class="line">    if (![self.appDelegate.managedOC save:&amp;error]) &#123;</span><br><span class="line">        NSLog(@&quot;新增失败: %@&quot;, error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、在<strong>FRC</strong>的代理方法中执行UITableView的cell变化操作，相应代码和详细注释如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark -NSFetchedResultsControllerDelegate</span><br><span class="line">/**</span><br><span class="line"> MOC托管对象将要发生变化</span><br><span class="line"> @param controller FRC</span><br><span class="line"> */</span><br><span class="line">- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller&#123;</span><br><span class="line">    [self.tableView beginUpdates];</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> MOC托管对象将要修改完成</span><br><span class="line"> @param controller FRC</span><br><span class="line"> */</span><br><span class="line">- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller&#123;</span><br><span class="line">    [self.tableView endUpdates];</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> 根据FRC的section返回tableview的分组标题</span><br><span class="line"> @param controller FRC</span><br><span class="line"> @param sectionName 标题值</span><br><span class="line"> @return 修改后的标题值</span><br><span class="line"> */</span><br><span class="line">- (NSString *)controller:(NSFetchedResultsController *)controller sectionIndexTitleForSectionName:(NSString *)sectionName&#123;</span><br><span class="line">    return [NSString stringWithFormat:@&quot;班级:%@&quot;, sectionName];</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> MOC托管对象修改</span><br><span class="line"> @param controller FRC</span><br><span class="line"> @param anObject 改变的托管对象</span><br><span class="line"> @param indexPath 改变的索引</span><br><span class="line"> @param type 变化类型</span><br><span class="line"> @param newIndexPath 改变后的索引</span><br><span class="line"> */</span><br><span class="line">- (void)controller:(NSFetchedResultsController *)controller</span><br><span class="line">   didChangeObject:(id)anObject</span><br><span class="line">       atIndexPath:(nullable NSIndexPath *)indexPath</span><br><span class="line">     forChangeType:(NSFetchedResultsChangeType)type</span><br><span class="line">      newIndexPath:(nullable NSIndexPath *)newIndexPath&#123;</span><br><span class="line">    switch (type) &#123;</span><br><span class="line">        //插入变化</span><br><span class="line">        case NSFetchedResultsChangeInsert:</span><br><span class="line">            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];</span><br><span class="line">            [self.tableView reloadData];</span><br><span class="line">            break;</span><br><span class="line">        //删除变化</span><br><span class="line">        case NSFetchedResultsChangeDelete:</span><br><span class="line">            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];</span><br><span class="line">            break;</span><br><span class="line">        //移动变化</span><br><span class="line">        case NSFetchedResultsChangeMove:</span><br><span class="line"></span><br><span class="line">            break;</span><br><span class="line">        //更新变化</span><br><span class="line">        case NSFetchedResultsChangeUpdate:</span><br><span class="line">        &#123;</span><br><span class="line">            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];</span><br><span class="line">            Student *student = [self.fetchedResultsController objectAtIndexPath:indexPath];</span><br><span class="line">            cell.textLabel.text = student.studentName;</span><br><span class="line">            cell.detailTextLabel.text = student.studentSex == 0 ? @&quot;男&quot; : @&quot;女&quot;;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> FRC section变化</span><br><span class="line"> @param controller FRC</span><br><span class="line"> @param sectionInfo section信息</span><br><span class="line"> @param sectionIndex section 索引</span><br><span class="line"> @param type 变化类型</span><br><span class="line"> */</span><br><span class="line">- (void)controller:(NSFetchedResultsController *)controller</span><br><span class="line">  didChangeSection:(id&lt;NSFetchedResultsSectionInfo&gt;)sectionInfo</span><br><span class="line">           atIndex:(NSUInteger)sectionIndex</span><br><span class="line">     forChangeType:(NSFetchedResultsChangeType)type&#123;</span><br><span class="line">    switch (type) &#123;</span><br><span class="line">        case NSFetchedResultsChangeInsert:</span><br><span class="line">//            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];</span><br><span class="line">            break;</span><br><span class="line">        case NSFetchedResultsChangeDelete:</span><br><span class="line">            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];</span><br><span class="line">            break;</span><br><span class="line">        case NSFetchedResultsChangeMove:</span><br><span class="line">            </span><br><span class="line">            break;</span><br><span class="line">        case NSFetchedResultsChangeUpdate:</span><br><span class="line">            </span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="版本迁移"><a href="#版本迁移" class="headerlink" title="版本迁移"></a>版本迁移</h5><p><strong>为什么要进行数据库版本迁移？</strong><br>应用在更新迭代的过程中，最初设计的数据库无法满足业务需求，需要修改数据库结构，但是客户端的持久化数据还保存在用户的设备磁盘中，因此需要跟随数据库版本的升级将低版本数据库结构存储的数据迁移到升级后的数据库中。这种情况可以通过良好的数据库结构设计减少迁移次数，但无法避免。其本质是新建新版本数据结构的数据库，通过每种映射或规则将老版本数据结构的数据添加到新版本的数据库中，然后删除老版本数据库，完成数据的迁移。CoreData提供了三种数据迁移方式：1.自带轻量级数据迁移；2.创建Mapping文件进行迁移；3.代码实现数据迁移。本文只进行简单介绍，后续会有专门详细说明的文章。<br><img src="/2018/03/30/CoreData详解/15223761915169.jpg"></p>
+<p><strong>自带轻量级数据迁移</strong><br>适用场景：当新版本数据库只是在老版本基础上进行数据表新增、原表新增属性操作时。<br><strong>创建Mapping文件进行迁移</strong><br>适用场景：复杂的数据迁移，例如旧表数据迁移到新表并对数据做处理、表删除、实体属性删除等，通过mapping文件建立源数据表数据到目标数据表的映射。<br><strong>代码实现数据迁移</strong><br>适用场景：监控复杂数据迁移的过程，进度等，例如Mapping文件迁移需要加载老版本和新版本的数据库的数据到内存，存在内存达到峰值被系统kill的风险，可以使用代码迁移将任务拆分。</p>
+<h3 id="多线程处理"><a href="#多线程处理" class="headerlink" title="多线程处理"></a>多线程处理</h3><p><strong>CoreData</strong>中<strong>MOC</strong>（托管对象上下文）本身不是线程安全的，因此不能跨线程使用同一个<strong>MOC</strong>，而<strong>PSC</strong>（持久化存储解析器）是线程安全的，多个托管对象上下文可以使用同一个持久化存储解析器。因此有两种多线程方案，本质都是将耗时操作放到子线程，UI操作放在主线程（UI优先级最高），保证主线程的同步和流畅。</p>
+<p><strong>MOC</strong>初始化可以指定并发队列类型：</p>
+<ul>
+<li>NSConfinementConcurrencyType : 该类型已经被启用。同NSMainQueueConcurrencyType；</li>
+<li>NSPrivateQueueConcurrencyType : 私有并发队列类型，操作将在子线程中执行；</li>
+<li>NSMainQueueConcurrencyType : 主并发队列类型，操作在主线中执行，如果涉及到UI相关的操作，应该使用该种类型。</li>
+</ul>
+<h5 id="通知模式多线程"><a href="#通知模式多线程" class="headerlink" title="通知模式多线程"></a>通知模式多线程</h5><p>使用<strong>MOC</strong>通知：当<strong>MOC</strong>进行save到本地操作时会发送<strong>NSManagedObjectContextDidSaveNotification</strong>通知。<br><img src="/2018/03/30/CoreData详解/15223703388014.jpg"></p>
+<ol>
+<li>子线程初始化自己的托管对象上下文<code>privateContext</code>；</li>
+<li>主线程初始化自己的托管对象上下文<code>mainContext</code>并监听<code>parivateContext</code>的这个通知；</li>
+<li>子线程执行完耗时操作后进行本地save；</li>
+<li><code>mainContext</code>在主线程接受到通知，进行merge操作并更新UI；</li>
+<li>这样将耗时操作和disk io都放到了子线程，同时也保证了主线程托管对象上下文的同步。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 获取当前数据库teacher表的最大ID</span><br><span class="line"> @return 最大ID</span><br><span class="line"> */</span><br><span class="line">- (NSInteger)getMaxTeacherId&#123;</span><br><span class="line">    int maxId = 0;</span><br><span class="line">    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kEntityName];</span><br><span class="line">    NSSortDescriptor *sortIdDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;teacherId&quot; ascending:YES];</span><br><span class="line">    fetchRequest.sortDescriptors = @[sortIdDescriptor];</span><br><span class="line">    NSArray *array = [self.mainMOContext executeFetchRequest:fetchRequest error:nil];</span><br><span class="line">    </span><br><span class="line">    maxId = [[array lastObject] teacherId] + 1;</span><br><span class="line">    </span><br><span class="line">    return maxId;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 通知模式多线程</span><br><span class="line"> */</span><br><span class="line">- (void)testCoredataMultiThread1 &#123;</span><br><span class="line">    NSLog(@&quot;%s&quot;,__func__);</span><br><span class="line">    //1、新建一个托管对象上下文，用私有化并列队列模式初始化</span><br><span class="line">    self.privateMOContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];</span><br><span class="line">    //2、设置跟主队列上下文使用同一个持久化存储解析器</span><br><span class="line">    self.privateMOContext.persistentStoreCoordinator = self.mainMOContext.persistentStoreCoordinator;</span><br><span class="line">    </span><br><span class="line">    //3、设置监听通知</span><br><span class="line">    NSLog(@&quot;%@&quot;,[NSOperationQueue currentQueue]);</span><br><span class="line">    self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification</span><br><span class="line">                                                                      object:self.privateMOContext queue:[NSOperationQueue currentQueue]</span><br><span class="line">                                                                  usingBlock:^(NSNotification * _Nonnull note) &#123;</span><br><span class="line">        NSLog(@&quot;usingBlock----%@&quot;,[NSThread currentThread]);</span><br><span class="line">        if (note.object == self.privateMOContext) &#123;</span><br><span class="line">            //回到主线程</span><br><span class="line">            dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">                NSLog(@&quot;dispatch_async----%@&quot;,[NSThread currentThread]);</span><br><span class="line">                [self.mainMOContext performBlock:^&#123;</span><br><span class="line">                    NSLog(@&quot;self.mainMOContext performBlock----%@&quot;,[NSThread currentThread]);</span><br><span class="line">                    [self.mainMOContext mergeChangesFromContextDidSaveNotification:note];</span><br><span class="line">                    self.teachers = [self queryAllTeachers];</span><br><span class="line">                &#125;];</span><br><span class="line">            &#125;);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    //获取当前数据库中teacher表的最大ID</span><br><span class="line">    NSInteger i = [self getMaxTeacherId];</span><br><span class="line">    //进行数据库耗时操作</span><br><span class="line">    for (int j = 0; j &lt; 500; ++j) &#123;</span><br><span class="line">        Teacher* teacher = [NSEntityDescription insertNewObjectForEntityForName:kEntityName</span><br><span class="line">                                                         inManagedObjectContext:self.privateMOContext];</span><br><span class="line">        NSInteger teacherId = i + j;</span><br><span class="line">        teacher.teacherId = teacherId;</span><br><span class="line">        teacher.teacherName = [NSString stringWithFormat:@&quot;老师%ld&quot;, teacherId];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [self.privateMOContext performBlock:^&#123;</span><br><span class="line">        NSLog(@&quot;self.privateMOContext performBlock-----%@&quot;,[NSThread currentThread]);</span><br><span class="line">        NSError *error;</span><br><span class="line">        if (self.privateMOContext.hasChanges) &#123;</span><br><span class="line">            if([self.privateMOContext save:&amp;error])&#123;</span><br><span class="line">                NSLog(@&quot;操作成功&quot;);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                NSLog(@&quot;error:%@&quot;,error);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="父子Context模式多线程"><a href="#父子Context模式多线程" class="headerlink" title="父子Context模式多线程"></a>父子Context模式多线程</h5><p><strong>MOC</strong>提供设置父子关系，子<strong>MOC</strong>进行save操作时会将变化push到父<strong>MOC</strong>。<br><img src="/2018/03/30/CoreData详解/15223856029283.jpg"></p>
+<ol>
+<li>创建多个context，两个子线程<code>privateContext1</code>和<code>privateContext2</code>，主线程<code>mainContext</code>，继承关系<code>privateContext1</code> -&gt; <code>mainContext</code> -&gt; <code>privateContext2</code>，建立一个三层关系，其中只有最上层privateContext2持有<strong>PSC</strong>；</li>
+<li>在<code>privateContext1</code>中进行耗时数据库操作，执行完成后，使用save方法push到<code>mainContext</code>，则<code>mainContext</code>可以同步到托管对象的而变动，然后使用save方法push到<code>privateContext2</code>，在<code>privateContext2</code>中进行save到本地，进行disk io；</li>
+<li>这样将数据库耗时操作和disk IO都放到子线程，同时代码简洁，结构更好，推荐使用这种方式。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 父子Context三层多线程</span><br><span class="line"> */</span><br><span class="line">- (void)testCoredataMultiThread3 &#123;</span><br><span class="line">    NSLog(@&quot;%s&quot;,__func__);</span><br><span class="line">    //1、新建两个托管对象上下文，用私有化并列队列模式初始化</span><br><span class="line">    NSManagedObjectContext *privateMOContext1 = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];</span><br><span class="line">    </span><br><span class="line">    NSManagedObjectContext *privateMOContext2 = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];</span><br><span class="line">    </span><br><span class="line">    NSManagedObjectContext *mainMOContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];</span><br><span class="line">    </span><br><span class="line">    privateMOContext2.persistentStoreCoordinator = self.appDelegate.psCoordinator;</span><br><span class="line">    privateMOContext1.parentContext = mainMOContext;</span><br><span class="line">    mainMOContext.parentContext = privateMOContext2;</span><br><span class="line">    </span><br><span class="line">    //获取当前数据库中teacher表的最大ID</span><br><span class="line">    NSInteger i = [self getMaxTeacherId];</span><br><span class="line">    //进行数据库耗时操作</span><br><span class="line">    for (int j = 0; j &lt; 500; ++j) &#123;</span><br><span class="line">        Teacher* teacher = [NSEntityDescription insertNewObjectForEntityForName:kEntityName</span><br><span class="line">                                                         inManagedObjectContext:privateMOContext2];</span><br><span class="line">        NSInteger teacherId = i + j;</span><br><span class="line">        teacher.teacherId = teacherId;</span><br><span class="line">        teacher.teacherName = [NSString stringWithFormat:@&quot;老师%ld&quot;, teacherId];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 私有队列的MOC和主队列的MOC，在执行save操作时，都应该调用performBlock:方法，在自己的队列中执行save操作。</span><br><span class="line">    // 私有队列的MOC执行完自己的save操作后，还调用了主队列MOC的save方法，将数据同步到主线程的context，然后主线程context调用save方法将数据同步到privateMOContext，来完成真正的持久化操作，否则不能持久化到本地</span><br><span class="line">    [privateMOContext1 performBlock:^&#123;</span><br><span class="line">        NSLog(@&quot;privateMOContext1 performBlock-----%@&quot;,[NSThread currentThread]);</span><br><span class="line">        if (privateMOContext1.hasChanges) &#123;</span><br><span class="line">            [privateMOContext1 save:nil];</span><br><span class="line">            [mainMOContext performBlock:^&#123;</span><br><span class="line">                NSLog(@&quot;privateMOContext1 performBlock-----%@&quot;,[NSThread currentThread]);</span><br><span class="line">                [mainMOContext save:nil];</span><br><span class="line">                [privateMOContext2 performBlock:^&#123;</span><br><span class="line">                    NSLog(@&quot;privateMOContext1 performBlock-----%@&quot;,[NSThread currentThread]);</span><br><span class="line">                    [privateMOContext2 save:nil];</span><br><span class="line">                &#125;];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    [self queryAllTeachers];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="优缺点和解决方案"><a href="#优缺点和解决方案" class="headerlink" title="优缺点和解决方案"></a>优缺点和解决方案</h3><h6 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h6><ol>
+<li>将数据库操作和SQL语句转化为OC对象的操作，将关系型数据库操作转换为面向对象操作，程序员不需要关心底层的SQL语句，提升了代码的易读性和理解性，降低难度</li>
+<li>提供图形化工具操作数据库，减少代码量，使用简单直观<ol>
+<li>查看数据库表结构和关系方便直观，降低数据库熟悉成本</li>
+<li>建表、表属性、表之间关系操作方便简洁</li>
+<li>使用图形化工具进行数据库迁移，简单直观</li>
+</ol>
+</li>
+<li>封装了NSFetchedResultsController，在UITableView和UICollectionView使用数据库数据作为数据源时，极大简化了数据变化和cell之间的同步</li>
+<li>通过托管对象进行数据库操作非常简单</li>
+</ol>
+<h6 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h6><ol>
+<li>不提供主键，需要程序员自己维护，为了维护数据库当做主键属性的唯一性，存储之前需要先做数据库查询</li>
+<li>每个<strong>MOC</strong>维护自己的<strong>MO</strong>在内存中，存在数据在内存中的多个副本数据重复的问题，浪费内存空间；不同<strong>MOC</strong>需要程序员自己处理数据同步问题；</li>
+<li>需要程序员自己实现多线程数据同步问题</li>
+<li><strong>MO</strong>非常容易出现跨线程使用引发野指针等问题</li>
+<li>只能通过CoreData框架提供的API进行数据库操作，不提供类似SQL语句这种操作，限制了灵活性，例如：多表联合查询使用SQL语句很方便，使用CoreData很复杂</li>
+<li>没有加密功能，需要程序员自己封装</li>
+</ol>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><p>综上所述使用CoreData应该充分利用其提供的图形化工具和对象，然后解决内存、多线程问题和跨线程使用<strong>MOC</strong>、<strong>MO</strong>的问题。</p>
+<h6 id="内存、多线程解决思路"><a href="#内存、多线程解决思路" class="headerlink" title="内存、多线程解决思路"></a>内存、多线程解决思路</h6><p>随着移动设备的硬件升级，单个或少数几个<strong>MOC</strong>的数据库数据的内存占用是能够接受的，主要需要防止滥用<strong>MOC</strong>造成数据的大量副本。</p>
+<ol>
+<li>可以参考<code>父子Context模式多线程</code>中整个应用采用三层<strong>MOC</strong>架构，数据库存储到文件操作放到顶级子线程的<strong>MOC</strong>中，UI相关操作放到主线程<strong>MOC</strong>中，其它耗时操作放到第三层子线程的<strong>MOC</strong>中，尽量保证只使用这三个<strong>MOC</strong>。如果确实需要拆分耗时操作到不同的子线程中，用完及时释放子线程和<strong>MOC</strong>。</li>
+<li>进行查询操作时，如果不需要完整对象，可以设置查询的返回结果为ManagedObjectID</li>
+</ol>
+<h6 id="跨层使用MO解决思路"><a href="#跨层使用MO解决思路" class="headerlink" title="跨层使用MO解决思路"></a>跨层使用<strong>MO</strong>解决思路</h6><p>CoreData堆栈中<strong>MOC</strong>管理的<strong>MO</strong>对象，对应着数据库持久化数据，上层如果直接用来作为业务层的数据流，在MVC中流动或者在Controller之间传递，根据单一原则，该对象已经不是独立的对应数据库了，会造成很强的依赖性和耦合行；并且由于<strong>MO</strong>的生命周期由<strong>MOC</strong>管理，不由Controller控制，当数据库发生变化时，会被修改或删除，跨线程时则更加复杂，因此会出现野指针等问题。</p>
+<p>使用SQLite或FMDB不会出现该问题，因为SQLite或FMDB交付给上层的是通用类型的数据，程序员自己转换为OC对象使用，生命周期可控。</p>
+<p>解决该问题的思路是<strong>MO</strong>本身应该只用来表征数据库数据，上层需要使用时应该将<strong>MO</strong>转换为自己可控的OC对象，不要直接使用<strong>MO</strong>。因此可以针对<strong>MO</strong>建立对应的OC对象，并将数据库操作封装一层到对应的OC对象中，并将<strong>MO</strong>转OC对象统一抽象出来，最后相当于对CoreDate做了一层封装，这样跨线程使用OC对象也不会有问题。使用协议的方式让OC对象实现基本的增删改查操作，详细的设计和实现可以参考<a href="http://www.cocoachina.com/ios/20170421/19096.html" target="_blank" rel="noopener">这篇文章</a>。<br><img src="/2018/03/30/CoreData详解/15223272599772.jpg"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>CoreData是Apple官方提供的一个持久化方案，而不仅仅是一个ORM框架，为了实现现在的功能进行了大量封装和设计，包含大量类。与SQLite或者FMDB相比，作者认为图形化工具是最大的亮点，但使用过程中需要注意上面描述的几点。到底使用哪种还是要结合业务场景来做选择，但是无论是使用哪种方案，都用该在其基础上封装一层再供上层使用，并且建立良好的数据库设计文档机制，方便查阅和减少熟悉数据库成本。</p>
+<p>以上就是作者对CoreData的学习和理解，如有需要改进的地方欢迎大家指正。</p>
+<p>全文<a href="https://github.com/KeepJiang/LearnCoreData" target="_blank" rel="noopener">Demo</a>在这里</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li><a href="http://www.cocoachina.com/ios/20160801/17248.html" target="_blank" rel="noopener">认识CoreData—基础使用</a></li>
+<li><a href="http://www.cocoachina.com/ios/20160802/17260.html" target="_blank" rel="noopener">认识CoreData—使用进阶</a></li>
+<li><a href="http://www.cocoachina.com/ios/20160803/17267.html" target="_blank" rel="noopener">认识CoreData—高级用法</a></li>
+<li><a href="http://www.cocoachina.com/ios/20160111/14926.html" target="_blank" rel="noopener">iOS中的谓词（NSPredicate）使用</a></li>
+<li><a href="http://blog.csdn.net/Hello_Hwc/article/details/46375517" target="_blank" rel="noopener">iOS CoreData详解</a></li>
+<li><a href="http://blog.csdn.net/like7xiaoben/article/details/7921519" target="_blank" rel="noopener">IOS成长之路-Core Data使用时用到的类–微解</a></li>
+<li><a href="http://www.cocoachina.com/ios/20170421/19096.html" target="_blank" rel="noopener">让CoreData更简单些</a></li>
+<li><a href="http://yulingtianxia.com/blog/2014/08/05/coredatachu-li-hai-liang-shu-ju/" target="_blank" rel="noopener">CoreData处理海量数据</a></li>
+<li><a href="https://www.jianshu.com/p/b3b764fc5191" target="_blank" rel="noopener">iOS Core Data 数据迁移 指南</a></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝咖啡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -189,7 +496,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -202,70 +509,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/30/CoreData详解/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/24/iOS打包遇到错误解决和记录/" class="archive-article-date">
-  	<time datetime="2018-01-24T09:13:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/24/iOS打包遇到错误解决和记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS打包遇到错误解决和记录</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/24/iOS打包遇到错误解决和记录/">iOS打包遇到错误解决和记录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">iOS打包</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">打包错误</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/笔记//" class="article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -288,8 +629,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
