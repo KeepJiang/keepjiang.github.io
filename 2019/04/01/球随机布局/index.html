@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 网络 | KeepJiang&#39;s blog</title>
+  <title>球随机布局 | KeepJiang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="iOS,OC,开发者,程序猿,编程,代码,开源,IT网站,Developer,Programmer,Coder">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KeepJiang&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/网络/index.html">
+  <meta name="description" content="记录学习的点点滴滴。">
+<meta name="keywords" content="iOS, 球, 随机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="球随机布局">
+<meta property="og:url" content="http://yoursite.com/2019/04/01/球随机布局/index.html">
 <meta property="og:site_name" content="KeepJiang&#39;s blog">
+<meta property="og:description" content="记录学习的点点滴滴。">
+<meta property="og:image" content="http://yoursite.com/2019/04/01/球随机布局/15541202292931.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/01/球随机布局/15541210093729.jpg">
+<meta property="og:updated_time" content="2019-04-01T12:57:58.334Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KeepJiang&#39;s blog">
+<meta name="twitter:title" content="球随机布局">
+<meta name="twitter:description" content="记录学习的点点滴滴。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/01/球随机布局/15541202292931.jpg">
   
     <link rel="alternative" href="/atom.xml" title="KeepJiang&#39;s blog" type="application/atom+xml">
   
@@ -147,56 +154,118 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-球随机布局" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/13/从HTTPS到AFNetworking的安全策略/" class="archive-article-date">
-  	<time datetime="2019-03-13T08:44:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/13/从HTTPS到AFNetworking的安全策略/">从HTTPS到AFNetworking的安全策略</a>
+    <h1 class="article-title" itemprop="name">
+      球随机布局
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/04/01/球随机布局/" class="archive-article-date">
+  	<time datetime="2019-04-01T11:50:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="实现球随机布局"><a href="#实现球随机布局" class="headerlink" title="实现球随机布局"></a>实现球随机布局</h3><blockquote>
+<p>最近碰到一个需求，需要在界面上随机出一些大小、颜色、位置随机的球（圆形按钮），并能够保证视觉效果好看，因此有了这篇文章</p>
+</blockquote>
+<p>效果如下图：<br><img src="/2019/04/01/球随机布局/15541202292931.jpg"></p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>拿到上面UI图后，首先分析UI的需求，有以下规律：</p>
+<ol>
+<li>球有随机一共5种大小</li>
+<li>球颜色各不相同</li>
+<li>最多有两个球相交，并且小部分相交</li>
+<li>有一个球在靠近中心点位置，并大小偏大</li>
+</ol>
+<p>第一个想到的是使用UICollectionView实现圆形布局，但是除中心球外，外面的球并不在圆上面，而且四周的球可能离相同圆弧很远。根据所有的布局和代码问题都应该抽象成一个数学问题的思路，最后发现要保证UI的协调和好看，需要保证球的随机错落分布的同时保证球整体是均匀分布的。<br>最后得到一个思路，从中心点出发，在屏幕上绘制圆形轨道，第一个球在第一个小圆的轨道上偏移，随后的球在之后的轨道上随机均匀分布；其次为了让球随机分布，看不出在同一个圆的轨道上，应该给每一个球一个中心点偏移量。<br>大概如下图：<br><img src="/2019/04/01/球随机布局/15541210093729.jpg"></p>
+<p>为了保证随机的同时均匀分布，则应该圆轨道上第一个球随机位置，然后同一个圆上面其它位置球相对在一定范围内随机。该圆形轨道的下一个轨道上，则根据该轨道第一个球进行一定范围内便宜，就像是内圈的球组成一个三角形，下一个轨道上也组成一个三角形，形成一定偏移。<br>具体实现思路：</p>
+<ol>
+<li>在屏幕上计算圆形轨道，存储圆形轨道半径数组</li>
+<li>球随机位置通过随机角度来实现，随机一个角度，通过圆形点和角度计算出球中心的位置，对中心位置给一个范围内的随机偏移</li>
+<li>第二个球也随机一个角度，然后随机一个大小，放到第二个轨道上。</li>
+<li>大于第一层并且不是该层第一个球则获取前一个球的角度，计算平均角度值（360 / 球个数）然后随机一个角度偏移量，计算出该球位置</li>
+<li>大于第二层轨道的球，为了保证不与前一层轨道的球重叠，则该轨道第一个球先获取前一层第一个球的角度，在该角度基础上随机一定范围的角度偏移</li>
+</ol>
+<p>这其中涉及到两个问题：</p>
+<ol>
+<li>iOS中随机一个范围内的值</li>
+<li>根据中心点和角度计算坐标点</li>
+</ol>
+<p>上面这两个问题，网上都有现成的代码。<br>下面直接上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 在一定范围内生成随机数</span><br><span class="line"> @param from 起始值</span><br><span class="line"> @param to 结束值</span><br><span class="line"> @return 随机数</span><br><span class="line"> */</span><br><span class="line">- (int)getRandomNumber:(int)from to:(int)to</span><br><span class="line">&#123;</span><br><span class="line">    return (int)(from + (arc4random() % (to - from + 1))); //+1,result is [from to]; else is [from, to)!!!!!!!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> --------------------------------------------------------------</span><br><span class="line"> 功能说明</span><br><span class="line"> --------------------------------------------------------------</span><br><span class="line"> 根据IOS视图中圆组件的中心点(x,y)、半径(r)、圆周上某一点与圆心的角度这3个</span><br><span class="line"> 条件来计算出该圆周某一点在IOS中的坐标(x2,y2)。</span><br><span class="line"> </span><br><span class="line"> 注意：</span><br><span class="line"> （1）IOS坐标体系与数学坐标体系有差别，因此不能完全采用数学计算公式。</span><br><span class="line"> （2）数学计算公式：</span><br><span class="line"> x2=x+r*cos(角度值*PI/180)</span><br><span class="line"> y2=y+r*sin(角度值*PI/180)</span><br><span class="line"> （3）IOS中计算公式：</span><br><span class="line"> x2=x+r*cos(角度值*PI/180)</span><br><span class="line"> y2=y-r*sin(角度值*PI/180)</span><br><span class="line"> </span><br><span class="line"> --------------------------------------------------------------</span><br><span class="line"> 参数说明</span><br><span class="line"> --------------------------------------------------------------</span><br><span class="line"> @param (CGPoint) center</span><br><span class="line"> </span><br><span class="line"> 圆圈在IOS视图中的中心坐标，即该圆视图的center属性</span><br><span class="line"> </span><br><span class="line"> @param (CGFloat) angle</span><br><span class="line"> 角度值，是0～360之间的值。</span><br><span class="line"> 注意：</span><br><span class="line"> （1）请使用下面坐标图形进行理解。</span><br><span class="line"> （2）角度是逆时针转的，从x轴中心(0,0)往右是0度角（或360度角），往左是180度角，往上是90度角，往下是270度角。</span><br><span class="line"> </span><br><span class="line"> (y)</span><br><span class="line"> ^</span><br><span class="line"> |</span><br><span class="line"> |</span><br><span class="line"> |</span><br><span class="line"> |</span><br><span class="line"> -----------------&gt; (x)</span><br><span class="line"> |(0,0)</span><br><span class="line"> |</span><br><span class="line"> |</span><br><span class="line"> |</span><br><span class="line"> </span><br><span class="line"> @param (CGFloat) radius</span><br><span class="line"> 圆周半径</span><br><span class="line"> */</span><br><span class="line">#pragma mark 计算圆圈上点在IOS系统中的坐标</span><br><span class="line">- (CGPoint)calcCircleCoordinateWithCenter:(CGPoint) center  andWithAngle : (CGFloat) angle andWithRadius: (CGFloat) radius&#123;</span><br><span class="line">    CGFloat x2 = ceilf(radius*cosf(angle*M_PI/180));</span><br><span class="line">    CGFloat y2 = ceilf(radius*sinf(angle*M_PI/180));</span><br><span class="line">    return CGPointMake(center.x+x2, center.y-y2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先定一个Model类来保存球即圆形按钮的布局相关参数，其中出现位置和移动位置后面做交互动画用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@interface CircleButtonModel : NSObject</span><br><span class="line">/*! @brief 颜色 */</span><br><span class="line">@property(nonatomic, strong) UIColor *color;</span><br><span class="line">/*! @brief 大小 */</span><br><span class="line">@property(nonatomic, assign) CGSize size;</span><br><span class="line">/*! @brief 当前的位置 */</span><br><span class="line">@property(nonatomic, assign) CGPoint center;</span><br><span class="line">/*! @brief 出现的位置 */</span><br><span class="line">@property(nonatomic, assign) CGPoint fromCenter;</span><br><span class="line">/*! @brief 移动到的位置 */</span><br><span class="line">@property(nonatomic, assign) CGPoint toCenter;</span><br><span class="line">/*! @brief 角度 */</span><br><span class="line">@property(nonatomic, assign) int angle;</span><br><span class="line">/*! @brief id */</span><br><span class="line">@property(nonatomic, copy) NSString *scene_id;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>核心代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">- (NSArray *)createButtonsWithArray:(NSArray *)dataArray&#123;</span><br><span class="line">    if ([dataArray notEmpty] &amp;&amp; dataArray.count &gt;= 4) &#123;</span><br><span class="line">        //一屏球的个数限定最大为7，最小为4</span><br><span class="line">        NSInteger num = dataArray.count &gt; 7 ? 7 : dataArray.count;</span><br><span class="line">        CGPoint center = self.center;</span><br><span class="line">        NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:num];</span><br><span class="line">        NSMutableArray *circles = [NSMutableArray arrayWithCapacity:num];</span><br><span class="line">        //用来记录第一个球是大球还是中球</span><br><span class="line">        int maxIndex = 0;</span><br><span class="line">        int maxCount[3] = &#123;1, 3, 3&#125;;</span><br><span class="line">        int currentCount[3] = &#123;0, 0, 0&#125;;</span><br><span class="line">        for (NSInteger j = 0; j &lt; num; j++) &#123;</span><br><span class="line">            DiscoveryResult *discoveryResult = dataArray[j];</span><br><span class="line">            //1.处理球的颜色</span><br><span class="line">            CircleButtonModel *circleButtonModel = [CircleButtonModel new];</span><br><span class="line">            [circles addObject:circleButtonModel];</span><br><span class="line">            //1.1随机一个颜色</span><br><span class="line">            if (!color) &#123;</span><br><span class="line">                int R = (arc4random() % 256);</span><br><span class="line">                int G = (arc4random() % 256);</span><br><span class="line">                int B = (arc4random() % 256);</span><br><span class="line">                color = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1];</span><br><span class="line">            &#125;</span><br><span class="line">            circleButtonModel.color = color;</span><br><span class="line">            //2.处理球的大小</span><br><span class="line">            //2.1第一个默认大球，第二个默认中球，之后随机大小</span><br><span class="line">            if (0 == j) &#123;</span><br><span class="line">                circleButtonModel.size = buttonSizeArray[1];</span><br><span class="line">            &#125;else if(1 == j)&#123;</span><br><span class="line">                circleButtonModel.size = buttonSizeArray[2];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                int sizeIndex = [self getRandomNumber:2 to:4];</span><br><span class="line">                circleButtonModel.size = buttonSizeArray[sizeIndex];</span><br><span class="line">            &#125;</span><br><span class="line">            //2.处理球的位置</span><br><span class="line">            //2.1随机球圆心在圆弧上的一个偏移量</span><br><span class="line">            int offset = [self getRandomNumber:-10 to:10];</span><br><span class="line">            //2.2随机一个角度偏移量</span><br><span class="line">            int angleOffset = [self getRandomNumber:-10 to:10];</span><br><span class="line">            //        offset = 0;</span><br><span class="line">//            CGPoint newCenter = CGPointMake(center.x - offset, center.y - offset);</span><br><span class="line">            CGPoint newCenter = center;</span><br><span class="line">            if (0 == maxIndex) &#123;</span><br><span class="line">                int angle = [self getRandomNumber:0 to:360];</span><br><span class="line">                circleButtonModel.angle = angle;</span><br><span class="line">                circleButtonModel.center = [self calcCircleCoordinateWithCenter:newCenter andWithAngle:angle andWithRadius:(radiusArray[maxIndex] + offset)];</span><br><span class="line">            &#125;else if(1 == maxIndex)&#123;</span><br><span class="line">                if (0 == currentCount[maxIndex]) &#123;</span><br><span class="line">                    int angle = [self getRandomNumber:0 to:360];</span><br><span class="line">                    circleButtonModel.angle = angle;</span><br><span class="line">                    circleButtonModel.center = [self calcCircleCoordinateWithCenter:newCenter andWithAngle:angle andWithRadius:(radiusArray[maxIndex] + offset)];</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    CircleButtonModel *preCircleButtonModel = circles[j - 1];</span><br><span class="line">                    int angle = 360 / maxCount[maxIndex] + angleOffset + preCircleButtonModel.angle;</span><br><span class="line">                    angle = angle &gt; 360 ? (angle - 360) : angle;</span><br><span class="line">                    circleButtonModel.angle = angle;</span><br><span class="line">                    circleButtonModel.center = [self calcCircleCoordinateWithCenter:newCenter andWithAngle:angle andWithRadius:(radiusArray[maxIndex] + offset)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if (0 == currentCount[maxIndex]) &#123;</span><br><span class="line">                    int index = (int)(j - maxCount[maxIndex -1]);</span><br><span class="line">                    CircleButtonModel *preCircleButtonModel = circles[index];</span><br><span class="line">                    int angle = [self getRandomNumber:60 to:90] + preCircleButtonModel.angle;</span><br><span class="line">                    angle = angle &gt; 360 ? (angle - 360) : angle;</span><br><span class="line">                    circleButtonModel.angle = angle;</span><br><span class="line">                    circleButtonModel.center = [self calcCircleCoordinateWithCenter:newCenter andWithAngle:angle andWithRadius:(radiusArray[maxIndex] + offset)];</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    CircleButtonModel *preCircleButtonModel = circles[j - 1];</span><br><span class="line">                    int angle = 360 / maxCount[maxIndex] + angleOffset + preCircleButtonModel.angle;</span><br><span class="line">                    angle = angle &gt; 360 ? (angle - 360) : angle;</span><br><span class="line">                    circleButtonModel.angle = angle;</span><br><span class="line">                    circleButtonModel.center = [self calcCircleCoordinateWithCenter:newCenter andWithAngle:angle andWithRadius:(radiusArray[maxIndex] + offset)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            int currentNum  = currentCount[maxIndex] + 1;</span><br><span class="line">            if (currentNum &gt;= maxCount[maxIndex]) &#123;</span><br><span class="line">                maxIndex++;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                currentCount[maxIndex] = currentNum;</span><br><span class="line">            &#125;</span><br><span class="line">            //3.处理球的离开屏幕动画的位置</span><br><span class="line">            int quadrant = ceil((circleButtonModel.angle / 90) % 4);</span><br><span class="line">            int toX = 0;</span><br><span class="line">            int toY = 0;</span><br><span class="line">            int toOffset = [self getRandomNumber:60 to:120];</span><br><span class="line">            switch (quadrant) &#123;</span><br><span class="line">                case 0:</span><br><span class="line">                    toX = self.view.frame.size.width + circleButtonModel.size.width * 0.5;</span><br><span class="line">                    toY = circleButtonModel.center.y - toOffset;</span><br><span class="line">                    break;</span><br><span class="line">                case 1:</span><br><span class="line">                    toX = -circleButtonModel.size.width * 0.5;</span><br><span class="line">                    toY = circleButtonModel.center.y - toOffset;</span><br><span class="line">                    break;</span><br><span class="line">                case 2:</span><br><span class="line">                    toX = -circleButtonModel.size.width * 0.5;</span><br><span class="line">                    toY = circleButtonModel.center.y + toOffset;</span><br><span class="line">                    break;</span><br><span class="line">                case 3:</span><br><span class="line">                    toX = self.view.frame.size.width + circleButtonModel.size.width * 0.5;</span><br><span class="line">                    toY = circleButtonModel.center.y + toOffset;</span><br><span class="line">                    break;</span><br><span class="line">                default:</span><br><span class="line">                    toX = self.view.frame.size.width + circleButtonModel.size.width * 0.5;</span><br><span class="line">                    toY = circleButtonModel.center.y - toOffset;</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">            circleButtonModel.toCenter = CGPointMake(toX, toY);</span><br><span class="line">            //4.创建按钮</span><br><span class="line">            CGRect frame = CGRectZero;</span><br><span class="line">            frame.size = circleButtonModel.size;</span><br><span class="line">            UIButton *button = [[BMRoundButton alloc] initWithFrame:frame];</span><br><span class="line">            [button setTitle:discoveryResult.title forState:UIControlStateNormal];</span><br><span class="line">            button.backgroundColor = circleButtonModel.color;</span><br><span class="line">            button.center = circleButtonModel.center;</span><br><span class="line">            circleButtonModel.scene_id = discoveryResult.label_id;</span><br><span class="line">            button.buttonModel = circleButtonModel;</span><br><span class="line">//            [self.view addSubview:button];</span><br><span class="line">            </span><br><span class="line">            int cornerRadius = frame.size.width * 0.5;</span><br><span class="line">            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:button.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];</span><br><span class="line">            CAShapeLayer *layer = CAShapeLayer.new;</span><br><span class="line">            layer.path = path.CGPath;</span><br><span class="line">            layer.frame = button.bounds;</span><br><span class="line">            button.layer.mask = layer;</span><br><span class="line">            //        [self animationScaleOnceWithView:button];</span><br><span class="line">            [self animationUpDownWithView:button];</span><br><span class="line">            </span><br><span class="line">            [button addTarget:self action:@selector(buttonOnClicked:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">            [buttons addObject:button];</span><br><span class="line">        &#125;</span><br><span class="line">        return [buttons copy];</span><br><span class="line">    &#125;</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>在随机球的基础上加上随机上下的动画，类似漂浮的动画，让界面更好看。<br>思路是：让球的中心在一个随机的范围内上下移动，并且每个球的上下动画随机，形成错落有致的视觉效应。<br>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 添加上下漂浮动画</span><br><span class="line"> @param view 要加动画的View</span><br><span class="line"> */</span><br><span class="line">- (void)animationUpDownWithView:(UIView *)view</span><br><span class="line">&#123;</span><br><span class="line">    CALayer *viewLayer = view.layer;</span><br><span class="line">    CGPoint position = viewLayer.position;</span><br><span class="line">    CGPoint fromPoint = CGPointMake(position.x, position.y);</span><br><span class="line">    CGPoint toPoint = CGPointZero;</span><br><span class="line">    </span><br><span class="line">    uint32_t typeInt = arc4random() % 100;</span><br><span class="line">    CGFloat distanceFloat = 0.0;</span><br><span class="line">    //随机0 - 3之前的一个随机数</span><br><span class="line">    while (distanceFloat == 0) &#123;</span><br><span class="line">        distanceFloat = (3 + (int)(arc4random() % (9 - 7 + 1))) * 100.0 / 101.0;</span><br><span class="line">    &#125;</span><br><span class="line">    //随机上或者下</span><br><span class="line">    if (typeInt % 2 == 0) &#123;</span><br><span class="line">        toPoint = CGPointMake(position.x, position.y - distanceFloat);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        toPoint = CGPointMake(position.x, position.y + distanceFloat);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@&quot;position&quot;];</span><br><span class="line">    animation.removedOnCompletion = NO;</span><br><span class="line">    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];</span><br><span class="line">    animation.fromValue = [NSValue valueWithCGPoint:fromPoint];</span><br><span class="line">    animation.toValue = [NSValue valueWithCGPoint:toPoint];</span><br><span class="line">    animation.autoreverses = YES;</span><br><span class="line">    //随机动画的总时长1.2 + x / 31</span><br><span class="line">    CGFloat durationFloat = 0.0;</span><br><span class="line">    while (durationFloat == 0.0) &#123;</span><br><span class="line">        durationFloat = 1.2 + (int)(arc4random() % (100 - 70 + 1)) / 31.0;</span><br><span class="line">    &#125;</span><br><span class="line">    [animation setDuration:durationFloat];</span><br><span class="line">    [animation setRepeatCount:MAXFLOAT];</span><br><span class="line">    </span><br><span class="line">    [viewLayer addAnimation:animation forKey:@&quot;upAndDown&quot;];</span><br><span class="line">    //添加动画围绕圆形轨迹运动，视觉效果不太好</span><br><span class="line">    //    CAKeyframeAnimation *keyFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@&quot;position&quot;];</span><br><span class="line">    //    keyFrameAnimation.removedOnCompletion = NO;</span><br><span class="line">    //    keyFrameAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];</span><br><span class="line">    ////    keyFrameAnimation.autoreverses = YES;</span><br><span class="line">    //    UIBezierPath *path = [[UIBezierPath alloc] init];</span><br><span class="line">    //    [path addArcWithCenter:view.center radius:2 startAngle:0 endAngle:2*M_PI clockwise:YES];</span><br><span class="line">    //    keyFrameAnimation.path = path.CGPath;</span><br><span class="line">    //    keyFrameAnimation.beginTime = CACurrentMediaTime() + [self getRandomNumber:0 to:10] * 1.0 / 20.0;</span><br><span class="line">    //    [keyFrameAnimation setDuration:4];</span><br><span class="line">    //    [keyFrameAnimation setRepeatCount:MAXFLOAT];</span><br><span class="line">    //    [viewLayer addAnimation:keyFrameAnimation forKey:@&quot;rotation&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="交互动画"><a href="#交互动画" class="headerlink" title="交互动画"></a>交互动画</h3>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝咖啡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">UI</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">安全</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随机</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">第三方库</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">球</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -209,17 +278,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/01/球随机布局/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/03/13/从HTTPS到AFNetworking的安全策略/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">从HTTPS到AFNetworking的安全策略</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -242,9 +398,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
