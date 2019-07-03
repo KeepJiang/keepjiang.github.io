@@ -17,7 +17,7 @@
 <meta property="og:description" content="记录学习的点点滴滴。">
 <meta property="og:image" content="http://yoursite.com/2019/04/01/球随机布局/15541202292931.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/04/01/球随机布局/15541210093729.jpg">
-<meta property="og:updated_time" content="2019-04-03T11:45:49.798Z">
+<meta property="og:updated_time" content="2019-07-03T09:54:17.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="球随机布局">
 <meta name="twitter:description" content="记录学习的点点滴滴。">
@@ -56,7 +56,7 @@
 		  <h1 class="header-author"><a href="/">木井二</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">Keep hungry And Stay foolish</p>
+		<p class="header-subtitle">不积跬步，无以至千里；不积小流，无以成江海。</p>
 		
 
 		<nav class="header-menu">
@@ -111,7 +111,7 @@
 			  <h1 class="header-author js-header-author">木井二</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Keep hungry And Stay foolish<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>不积跬步，无以至千里；不积小流，无以成江海。<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -183,7 +183,7 @@
 <li>最多有两个球相交，并且小部分相交</li>
 <li>有一个球在靠近中心点位置，并大小偏大</li>
 </ol>
-<p>第一个想到的是使用UICollectionView实现圆形布局，但是除中心球外，外面的球并不在圆上面，而且四周的球可能离相同圆弧很远。根据所有的布局和代码问题都应该抽象成一个数学问题的思路，最后发现要保证UI的协调和好看，需要保证球的随机错落分布的同时保证球整体是均匀分布的。<br>最后得到一个思路，从中心点出发，在屏幕上绘制圆形轨道，第一个球在第一个小圆的轨道上偏移，随后的球在之后的轨道上随机均匀分布；其次为了让球随机分布，看不出在同一个圆的轨道上，应该给每一个球一个中心点偏移量。<br>大概如下图：<br><img src="/2019/04/01/球随机布局/15541210093729.jpg"></p>
+<p>第一个想到的是使用UICollectionView实现圆形布局，但是除中心球外，外面的球并不在圆上面，而且四周的球可能离相同圆弧很远。根据所有的布局和代码问题都应该抽象成一个数学问题的思路，最后发现要保证UI的协调和好看，需要保证球的随机错落分布的同时保证球整体是均匀分布的。<br>最后得到一个思路，从中心点出发，在屏幕上绘制圆形轨道，第一个球在第一个小圆的轨道上偏移，随后的球在之后的轨道上随机均匀分布；其次为了让球随机分布，看不出在同一个圆的轨道上，应该给每一个球一个中心点偏移量。<br><a id="more"></a><br>大概如下图：<br><img src="/2019/04/01/球随机布局/15541210093729.jpg"></p>
 <p>为了保证随机的同时均匀分布，则应该圆轨道上第一个球随机位置，然后同一个圆上面其它位置球相对在一定范围内随机。该圆形轨道的下一个轨道上，则根据该轨道第一个球进行一定范围内便宜，就像是内圈的球组成一个三角形，下一个轨道上也组成一个三角形，形成一定偏移。<br>具体实现思路：</p>
 <ol>
 <li>在屏幕上计算圆形轨道，存储圆形轨道半径数组</li>
@@ -338,6 +338,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/07/03/自定义TbaleView索引栏/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          自定义TableView索引栏
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/03/13/从HTTPS到AFNetworking的安全策略/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">从HTTPS到AFNetworking的安全策略</div>
@@ -466,11 +475,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">iOS打包</a>
+                <a href="javascript:void(0)" class="js-tag color2">UITableView</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包错误</a>
+                <a href="javascript:void(0)" class="js-tag color3">自定义View</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -479,18 +488,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">安全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">第三方库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,6 +500,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">球</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">第三方库</a>
               </li>
             
             <div class="clearfix"></div>
