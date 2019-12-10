@@ -15,13 +15,13 @@
 <meta property="og:url" content="http://yoursite.com/2019/04/01/球随机布局/index.html">
 <meta property="og:site_name" content="KeepJiang&#39;s blog">
 <meta property="og:description" content="记录学习的点点滴滴。">
-<meta property="og:image" content="http://yoursite.com/2019/04/01/球随机布局/04/01/球随机布局/15541202292931.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/04/01/球随机布局/04/01/球随机布局/15541210093729.jpg">
-<meta property="og:updated_time" content="2019-09-09T09:25:45.330Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/01/球随机布局/15541202292931.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/01/球随机布局/15541210093729.jpg">
+<meta property="og:updated_time" content="2019-12-10T10:09:38.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="球随机布局">
 <meta name="twitter:description" content="记录学习的点点滴滴。">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/01/球随机布局/04/01/球随机布局/15541202292931.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/01/球随机布局/15541202292931.jpg">
   
     <link rel="alternative" href="/atom.xml" title="KeepJiang&#39;s blog" type="application/atom+xml">
   
@@ -175,7 +175,9 @@
         <h3 id="实现球随机布局"><a href="#实现球随机布局" class="headerlink" title="实现球随机布局"></a>实现球随机布局</h3><blockquote>
 <p>最近碰到一个需求，需要在界面上随机出一些大小、颜色、位置随机的球（圆形按钮），并能够保证视觉效果好看，并且可以切换上一屏和下一屏附带动画，针对该需求想了很多方法，写该篇文章记录下来</p>
 </blockquote>
-<p>效果如下图：<br><img src="/2019/04/01/球随机布局/04/01/球随机布局/15541202292931.jpg"></p>
+<p>效果如下图：</p>
+<div style="width:50%"><img src="/2019/04/01/球随机布局/15541202292931.jpg" alt=""><br></div>
+
 <p>代码地址：<a href="https://github.com/KeepJiang/GWCircleLayoutBall" target="_blank" rel="noopener">GWCircleLayoutBall</a></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>拿到上面UI图后，首先分析UI的需求，有以下规律：</p>
 <ol>
@@ -186,7 +188,9 @@
 <li>切换到下一屏时重新随机不同位置的球，上一屏球移出动画</li>
 <li>切换到上一屏时，当前屏球透明消失，上一屏从屏外移回到以前的位置</li>
 </ol>
-<p>第一个想到的是使用UICollectionView实现圆形布局，但是除中心球外，外面的球并不在圆上面，而且四周的球可能离相同圆弧很远。根据所有的布局和代码问题都应该抽象成一个数学问题的思路，最后发现要保证UI的协调和好看，需要保证球的随机错落分布的同时保证球整体是均匀分布的。<br>最后得到一个思路，从中心点出发，在屏幕上绘制圆形轨道，第一个球在第一个小圆的轨道上偏移，随后的球在之后的轨道上随机均匀分布；其次为了让球随机分布，看不出在同一个圆的轨道上，应该给每一个球一个中心点偏移量。<br><a id="more"></a><br>大概如下图：<br><img src="/2019/04/01/球随机布局/04/01/球随机布局/15541210093729.jpg"></p>
+<p>第一个想到的是使用UICollectionView实现圆形布局，但是除中心球外，外面的球并不在圆上面，而且四周的球可能离相同圆弧很远。根据所有的布局和代码问题都应该抽象成一个数学问题的思路，最后发现要保证UI的协调和好看，需要保证球的随机错落分布的同时保证球整体是均匀分布的。<br>最后得到一个思路，从中心点出发，在屏幕上绘制圆形轨道，第一个球在第一个小圆的轨道上偏移，随后的球在之后的轨道上随机均匀分布；其次为了让球随机分布，看不出在同一个圆的轨道上，应该给每一个球一个中心点偏移量。<br><a id="more"></a><br>大概如下图：</p>
+<div style="width:50%"><img src="/2019/04/01/球随机布局/15541210093729.jpg" alt=""><br></div>
+
 <p>为了保证随机的同时均匀分布，则应该圆轨道上第一个球随机位置，然后同一个圆上面其它位置球相对在一定范围内随机。该圆形轨道的下一个轨道上，则根据该轨道第一个球进行一定范围内便宜，就像是内圈的球组成一个三角形，下一个轨道上也组成一个三角形，形成一定偏移。<br>具体实现思路：</p>
 <ol>
 <li>在屏幕上计算圆形轨道，存储圆形轨道半径数组</li>
@@ -493,14 +497,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">第三方框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态页面</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">框架</a>
               </li>
              
@@ -510,6 +506,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">AOP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">第三方框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态页面</a>
               </li>
              
               <li class="article-tag-list-item">

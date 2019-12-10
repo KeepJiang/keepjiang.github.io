@@ -15,17 +15,23 @@
 <meta property="og:url" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/index.html">
 <meta property="og:site_name" content="KeepJiang&#39;s blog">
 <meta property="og:description" content="记录学习的点点滴滴。">
-<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15363041171906.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15363052753560.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15363054248482.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/1552539912943.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15366517658129.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15759709951869.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15759710134237.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15759710313090.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15759711569768.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15363041171906.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15363052753560.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15363054248482.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/1552539912943.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15759712704553.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15759714178456.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15366517658129.jpg">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/svg/bL71Qi904BtlLmHFYlG7SfCKgL14ZD9ZMPA9Zcntm-oifOZ7VaM_edWK-ZVYRtGtIKaygFIKpPltvhsPMI0hY7hdx-Ffyt0-74zVFpqXCYMjZQRfSluyShm6pPX9HgEJjLGAz0fsuY4g2RUI8Nf5pK1QAZ7qc6780ZKjPGOrKXeBUKAGXqOD3RPed1rBL8uWCKwpXulwTmwsDDe6DH0PybyBEeVmG8tyWho-aYkkYN5_8FP2LC4Ad-FcB6absVdcpa8RCouCNNFnxOTHPdn5EmXnZEDMERudb3e3TPDI-jo6tXwXa4xnazIvGhswrvXWuvS_kxp1IET99-c5P7znwtQ2NHt1ecNmMQ_o-jDqKXqVUERBxuRoGRF8SAoomJftM_fA_8V77OzRSRnDej2_4o368WmFbGzM1Fu8IsrBjkCtQHXnj_uFtnHe2xGWPxbsRFfMIAFz1G00">
-<meta property="og:updated_time" content="2019-03-14T05:12:43.870Z">
+<meta property="og:updated_time" content="2019-12-10T10:02:42.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从HTTPS到AFNetworking的安全策略">
 <meta name="twitter:description" content="记录学习的点点滴滴。">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15363041171906.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/13/从HTTPS到AFNetworking的安全策略/15759709951869.jpg">
   
     <link rel="alternative" href="/atom.xml" title="KeepJiang&#39;s blog" type="application/atom+xml">
   
@@ -179,10 +185,7 @@
         <h3 id="https"><a href="#https" class="headerlink" title="https"></a>https</h3><blockquote>
 <p><strong>AFNetworking</strong>是现今使用最广泛的基于Object-c的网络库，https现在也得到推广，越来越多的网站开始使用https来加强数据的安全性。本篇文章从https的设计理念出发，详细讲解https为什么要这么设计？最后过渡到解析<strong>AFNetworking</strong>如何设计和实现网络安全模块</p>
 </blockquote>
-<h4 id="https设计思路"><a href="#https设计思路" class="headerlink" title="https设计思路"></a>https设计思路</h4><pre class="mermaid">graph LR;  
-　　客户端A--消息内容---服务器B;</pre>
-
-<p>http协议的数据是明文传输的，面临三大风险：</p>
+<h4 id="https设计思路"><a href="#https设计思路" class="headerlink" title="https设计思路"></a>https设计思路</h4><p><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15759709951869.jpg" alt=""><br>http协议的数据是明文传输的，面临三大风险：</p>
 <ol>
 <li>消息被窃听</li>
 <li>消息被篡改</li>
@@ -204,144 +207,39 @@
 </ul>
 <h5 id="基于加密算法的两种设计思路"><a href="#基于加密算法的两种设计思路" class="headerlink" title="基于加密算法的两种设计思路"></a>基于加密算法的两种设计思路</h5><p>基于非对称加密算法的特性，可以设计客户端和服务器端同时使用非对称加密则可以保障信息的安全</p>
 <ol>
-<li>使用非对称加密</li>
+<li>使用非对称加密<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15759710134237.jpg" alt=""></li>
+<li>使用对称加密<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15759710313090.jpg" alt=""></li>
 </ol>
-<pre class="mermaid">sequenceDiagram
-　　　participant A as 客户端A
-　　　participant B as 服务器B
-　　　loop 会话
-　　　A->>B:使用服务器B公钥加密消息
-　　　loop 私钥解密消息
-　　　　　B->B:查看消息内容
-　　　end 
-　　　Note right of B:只有服务器拥有私钥，能解密查看消息内容
-　　　B->>A:使用客户端A公钥加密消息
-　　　loop 私钥解密消息
-　　　　　A->A:查看消息内容
-　　　end 
-　　　end</pre>
-
+<p>两种方案都能解决信息加密的问题，但是因为非对称密码算法有两个缺点 : </p>
 <ol>
-<li>使用对称加密</li>
+<li>加密速度慢, 比对称加密算法慢 10 ～ 100 倍 , 因此只可用其加密小数据 (如对称密钥)，</li>
+<li>加密后会导致得到的密文变长。<br>因此一般采用对称加密算法加密其文件, 然后用非对称算法加密对称算法所用到的对称密钥。针对http报文加密选用对称加密更合适。</li>
 </ol>
-<pre class="mermaid">sequenceDiagram
-　　　participant A as 客户端A
-　　　participant B as 服务器B
-　　　loop 会话
-　　　A->>B:使用密钥加密消息
-　　　loop 密钥解密消息
-　　　　　B->B:查看消息内容
-　　　end 
-　　　
-　　　B->>A:使用密钥加密消息
-　　　loop 密钥解密消息
-　　　　　A->A:查看消息内容
-　　　end 
-　　　end</pre>
-两种方案都能解决信息加密的问题，但是因为非对称密码算法有两个缺点 : 
-1. 加密速度慢, 比对称加密算法慢 10 ～ 100 倍 , 因此只可用其加密小数据 (如对称密钥)，
-2. 加密后会导致得到的密文变长。
-因此一般采用对称加密算法加密其文件, 然后用非对称算法加密对称算法所用到的对称密钥。针对http报文加密选用对称加密更合适。
-
-使用该方案解决了消息的被窃取和被篡改两个问题，但是还存在两个问题：
-1. 如何保障用于对称加密的密钥的安全
-2. 如何验证通信双方身份，防止身份伪造
-
-协商生成密钥的过程使用非对称加密就能保证密钥的安全，https也是使用该思路，大致分两个阶段：
-1. 使用非对称加密算法加密协商生成对称加密的过程
-2. 使用对称加密算法和协商的密钥加密传输的数据
-
-<pre class="mermaid">sequenceDiagram
-　　　participant A as 客户端A
-　　　participant B as 服务器B
-　　　Note left of A:生成随机数a
-　　　A->>B:使用服务器B公钥加密消息（随机数a+支持的对称加密算法）
-　　　Note right of B:使用私钥解密获取a，并生成随机数b
-　　　B->>A:使用客户端A公钥加密消息（随机数b+选择的对称加密算法）
-　　　Note left of A:私钥解密消息，随机数a+b+对称加密算法生成密钥
-　　　A->>B:对称加密算法密钥加密消息
-　　　Note right of B:随机数a+b+对称加密算法生成密钥，解密消息
-　　　B->>A:对称加密算法密钥加密消息</pre>
-上述过程有一个问题需要解决，客户端A如何获取服务器B的公钥以及证明该公钥就是服务器B的。可能方案：服务器B将公钥发送给客户端A或放到远端服务器，又会引入公钥传输的安全问题。在这里引入第三方机构认证解决循环依赖问题，使用数字证书来做身份验证。
-
-##### 摘要算法
-摘要算法在互联网安全体系中也扮演了重要的角色。摘要算法有以下特性：
-* 只要源文本不同，计算得到的结果，必然不同（或者说机会很少）。
-* 无法从结果反推出源数据。
-基于以上特性，我们一般使用摘要算法来校验原始内容是否被篡改。常见的摘要算法有 MD5、SHA 等。
-
-##### 数字签名
-数字签名就是用摘要算法提取出源文件的摘要并用私钥进行加密后的内容，可以理解为生活中文件上的签名或盖章，标识该文件就出自签名者或盖章者并篡改无效。
-<img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15363041171906.jpg">
-
-##### 数字证书
-数字证书可以理解为"数字身份证"，主要包含证书主体相关信息、公钥以及这些信息的数字签名，由认证中心来验明身份。认证中心是一家能向用户签发数字证书以确认用户身份的管理机构
-
-<img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15363052753560.jpg">
-
-认证中心类似于DNS是一个分布式的树状结构：
-
-<img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15363054248482.jpg">
-
-
-验证证书的过程：
-<img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/1552539912943.jpg">
-
-##### 单向认证和双向认证过程
-引入数字证书和数字签名后即可在上面非对称加密算法和对称加密算法基础上解决信息篡改和身份认证问题：
-
-<pre class="mermaid">sequenceDiagram
-　　　participant A as 客户端A
-　　　participant B as 服务器B
-　　　Note left of A:生成随机数a
-　　　A->>B:1. 发送随机数a，客户端支持的对称加密算法等信息
-　　　Note right of B:生成随机数b
-　　　B->>A:2.1 发送随机数b+选择的对称加密算法
-　　　B->>A:2.2 发送服务器证书
-　　　B->>A:2.3 需要验证客户端证书
-　　　loop 验证证书
-　　　　　A->A:3. 验证服务器证书是否合法，合法继续，否则警告
-　　　end 
-　　　Note left of A:生成随机数c
-　　　A->>B:4.1 校验通过后，发送随机数c和客户端证书
-　　　A->>B:4.2 使用私钥生成消息的数字签名
-　　　A->>B:4.3 使用服务器公钥对内容+数字签名加密
-　　　loop 验证证书
-　　　　　B->B:5.1 验证客户端证书是否合法，合法继续，否则断开连接
-　　　end 
-　　　loop 验证数字签名
-　　　　　B->B:5.2 计算消息主体内容摘要a，使用客户端公钥解密数字签名获取摘要b，对比a和b
-　　　end 
-　　　Note right of B:客户端证书和消息验证通过后，使用随机数a+b+c使用对称加密算法生成密钥
-　　　B->>A:6. 对称加密算法密钥加密消息发送
-　　　Note left of A:使用随机数a+b+c和相同的对称加密算法生成密钥，解密消息，解密成功则协商密钥成功
-　　　A->>B:7. 协商对称加密算法和密钥成功，开始加密通信</pre>
-以上就是https双向认证的完整过程，完美的解决了http面临的三个问题。而https的使用更多的是使用单向验证，因为：
-1. 客户端身份的认证更多的是在应用层做而不是传输层并且对客户端认证没有那么严
-2. 每个客户端都需要唯一的证书，如果使用CA认证的会带来巨大的成本，使用自建证书还需要处理客户端获取证书的问题
-
-https单向验证只是去掉了客户端证书的验证过程，具体如下：
-
-<pre class="mermaid">sequenceDiagram
-　　　participant A as 客户端A
-　　　participant B as 服务器B
-　　　Note left of A:生成随机数a
-　　　A->>B:1. 发送随机数a，客户端支持的对称加密算法等信息
-　　　Note right of B:生成随机数b
-　　　B->>A:2.1 发送随机数b+选择的对称加密算法
-　　　B->>A:2.2 发送服务器证书
-　　　B->>A:2.3 不验证客户端证书
-　　　loop 验证证书
-　　　　　A->A:3. 验证服务器证书是否合法，合法继续，否则警告
-　　　end 
-　　　Note left of A:生成随机数c
-　　　A->>B:4.1 校验通过后，发送随机数c
-　　　A->>B:4.2 使用服务器公钥对内容加密
-　　　Note right of B:使用私钥解密消息，使用随机数a+b+c使用对称加密算法生成密钥
-　　　B->>A:6. 对称加密算法密钥加密消息发送
-　　　Note left of A:使用随机数a+b+c和相同的对称加密算法生成密钥，解密消息，解密成功则协商密钥成功
-　　　A->>B:7. 协商对称加密算法和密钥成功，开始加密通信</pre>
-
+<p>使用该方案解决了消息的被窃取和被篡改两个问题，但是还存在两个问题：</p>
+<ol>
+<li>如何保障用于对称加密的密钥的安全</li>
+<li>如何验证通信双方身份，防止身份伪造</li>
+</ol>
+<p>协商生成密钥的过程使用非对称加密就能保证密钥的安全，https也是使用该思路，大致分两个阶段：</p>
+<ol>
+<li>使用非对称加密算法加密协商生成对称加密的过程</li>
+<li>使用对称加密算法和协商的密钥加密传输的数据<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15759711569768.jpg" alt=""><br>上述过程有一个问题需要解决，客户端A如何获取服务器B的公钥以及证明该公钥就是服务器B的。可能方案：服务器B将公钥发送给客户端A或放到远端服务器，又会引入公钥传输的安全问题。在这里引入第三方机构认证解决循环依赖问题，使用数字证书来做身份验证。</li>
+</ol>
+<h5 id="摘要算法"><a href="#摘要算法" class="headerlink" title="摘要算法"></a>摘要算法</h5><p>摘要算法在互联网安全体系中也扮演了重要的角色。摘要算法有以下特性：</p>
+<ul>
+<li>只要源文本不同，计算得到的结果，必然不同（或者说机会很少）。</li>
+<li>无法从结果反推出源数据。<br>基于以上特性，我们一般使用摘要算法来校验原始内容是否被篡改。常见的摘要算法有 MD5、SHA 等。</li>
+</ul>
+<h5 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h5><p>数字签名就是用摘要算法提取出源文件的摘要并用私钥进行加密后的内容，可以理解为生活中文件上的签名或盖章，标识该文件就出自签名者或盖章者并篡改无效。<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15363041171906.jpg" alt=""></p>
+<h5 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h5><p>数字证书可以理解为”数字身份证”，主要包含证书主体相关信息、公钥以及这些信息的数字签名，由认证中心来验明身份。认证中心是一家能向用户签发数字证书以确认用户身份的管理机构<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15363052753560.jpg" alt=""></p>
+<p>认证中心类似于DNS是一个分布式的树状结构：<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15363054248482.jpg" alt=""></p>
+<p>验证证书的过程：<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/1552539912943.jpg" alt=""></p>
+<h5 id="单向认证和双向认证过程"><a href="#单向认证和双向认证过程" class="headerlink" title="单向认证和双向认证过程"></a>单向认证和双向认证过程</h5><p>引入数字证书和数字签名后即可在上面非对称加密算法和对称加密算法基础上解决信息篡改和身份认证问题：<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15759712704553.jpg" alt=""><br>以上就是https双向认证的完整过程，完美的解决了http面临的三个问题。而https的使用更多的是使用单向验证，因为：</p>
+<ol>
+<li>客户端身份的认证更多的是在应用层做而不是传输层并且对客户端认证没有那么严</li>
+<li>每个客户端都需要唯一的证书，如果使用CA认证的会带来巨大的成本，使用自建证书还需要处理客户端获取证书的问题</li>
+</ol>
+<p>https单向验证只是去掉了客户端证书的验证过程，具体如下：<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15759714178456.jpg" alt=""></p>
 <p>QA:为什么要三个随机数？<br>三个随机数保证随机性，保证每次客户端和服务器生成的密钥不同，并且增加破解难度</p>
 <h5 id="charels抓https包原理"><a href="#charels抓https包原理" class="headerlink" title="charels抓https包原理"></a>charels抓https包原理</h5><p>https的单向认证由于没有验证客户端身份，因此只需要破坏客户端验证服务器数字证书这一步即可完成中间人攻击，这就是charels抓取https包需要在客户端安装charles根证书的原因，这样客户端就会信任charels作为服务器。</p>
 <h3 id="AFSecurityPolicy"><a href="#AFSecurityPolicy" class="headerlink" title="AFSecurityPolicy"></a>AFSecurityPolicy</h3><p>AFSecurityPolicy其实就是AFNetworking框架对客户端验证https证书是否可信任的封装和扩充。增加了客户端通过服务器证书验证的方式，即提前将服务器证书放到APP bundle或沙盒中，对比存储在客户端本地的证书和服务器证书来完成验证。</p>
@@ -365,7 +263,7 @@ https单向验证只是去掉了客户端证书的验证过程，具体如下：
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 该方法的作用就是处理服务器要求的认证挑战, 需要在该方法中告诉系统如何处理认证挑战</span><br><span class="line"> （访问HTTPS时需要认证服务器的证书，会回调该方法）</span><br><span class="line"> 进行http BASIC认证、http DIGEST认证时同样会回调该方法</span><br><span class="line"></span><br><span class="line"> @param session  当前会话sesstion</span><br><span class="line"> @param challenge 认证挑战</span><br><span class="line"> @param completionHandler 处理认证挑战的block(第一个参数: 代表如何处理认证挑战;第二个参数: 代表使用哪个凭证)</span><br><span class="line"> */</span><br><span class="line">- (void)URLSession:(NSURLSession *)session</span><br><span class="line">didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge</span><br><span class="line"> completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler</span><br><span class="line">&#123;</span><br><span class="line">    /*disposition：如何处理身份认证</span><br><span class="line">     NSURLSessionAuthChallengeUseCredential = 0,                     使用凭证</span><br><span class="line">     NSURLSessionAuthChallengePerformDefaultHandling = 1,            使用系统默认方式处理</span><br><span class="line">     NSURLSessionAuthChallengeCancelAuthenticationChallenge = 2,     取消身份认证</span><br><span class="line">     NSURLSessionAuthChallengeRejectProtectionSpace = 3,             拒绝当前这一次认证, 下一次再询问</span><br><span class="line">     */</span><br><span class="line">    //AFNetworking中的处理方式</span><br><span class="line">    NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">    __block NSURLCredential *credential = nil;</span><br><span class="line">    //如果暴露给外部调用的身份认证处理block不为空，说明外部处理认证，则直接调用证书信任处理block进行处理并获取结果</span><br><span class="line">    if (self.sessionDidReceiveAuthenticationChallenge) &#123;</span><br><span class="line">        disposition = self.sessionDidReceiveAuthenticationChallenge(session, challenge, &amp;credential);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 判断当前的认证挑战是进行服务器证书信任认证，即客户端的接收认证挑战方法是NSURLAuthenticationMethodServerTrust</span><br><span class="line">        // 也就是说服务器端需要客户端返回一个根据认证挑战的保护空间提供的信任（即challenge.protectionSpace.serverTrust）产生的挑战证书。</span><br><span class="line">        // 而这个证书就需要使用credentialForTrust:来创建一个NSURLCredential对象</span><br><span class="line">        /**</span><br><span class="line">         NSURLAuthenticationMethodHTTPBasic:        进行HTTPBasic认证</span><br><span class="line">         NSURLAuthenticationMethodHTTPDigest:       HTTPDigest认证</span><br><span class="line">         NSURLAuthenticationMethodHTMLForm          HTMLForm表单认证</span><br><span class="line">         NSURLAuthenticationMethodNegotiate:        Negotiate认证</span><br><span class="line">         NSURLAuthenticationMethodClientCertificate:客户端证书验证</span><br><span class="line">         */</span><br><span class="line">        if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) &#123;</span><br><span class="line">            // 基于客户端的安全策略来决定是否信任该服务器，不信任的话，也就没必要响应挑战</span><br><span class="line">            if ([self.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) &#123;</span><br><span class="line">                // 创建挑战凭证（注：挑战方式为UseCredential需要新建挑战凭证）</span><br><span class="line">                credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];</span><br><span class="line">                // 确定挑战的方式</span><br><span class="line">                if (credential) &#123;</span><br><span class="line">                     //证书挑战  设计policy,none，则跑到这里</span><br><span class="line">                    disposition = NSURLSessionAuthChallengeUseCredential;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                //取消挑战，即表明服务器证书验证失败</span><br><span class="line">                disposition = NSURLSessionAuthChallengeCancelAuthenticationChallenge;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //默认挑战方式，默认CA流程验证服务器证书</span><br><span class="line">            disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //完成挑战，使用block告诉系统如何处理该次认证挑战</span><br><span class="line">    if (completionHandler) &#123;</span><br><span class="line">        completionHandler(disposition, credential);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>AFSecurityPolicy核心方法实现解析：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 校验服务器是否可信任</span><br><span class="line"></span><br><span class="line"> @param serverTrust 安全信任封装的结构体</span><br><span class="line"> @param domain      主机名</span><br><span class="line"> @return YES:验证通过 / NO:验证不通过</span><br><span class="line"> */</span><br><span class="line">- (BOOL)evaluateServerTrust:(SecTrustRef)serverTrust</span><br><span class="line">                  forDomain:(NSString *)domain</span><br><span class="line">&#123;</span><br><span class="line">    //如果SSL绑定证书模式为系统默认或者绑定证书的个数为0，则只能使用系统默认校验证书的方式，此时如果主机名不为空 &amp;&amp; 允许不合法的证书 &amp;&amp; 验证主机名，则说明又想使用非系统默认方式校验，则直接返回检验失败</span><br><span class="line">    if (domain &amp;&amp; self.allowInvalidCertificates &amp;&amp; self.validatesDomainName &amp;&amp; (self.SSLPinningMode == AFSSLPinningModeNone || [self.pinnedCertificates count] == 0)) &#123;</span><br><span class="line">        // https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html</span><br><span class="line">        //  According to the docs, you should only trust your provided certs for evaluation.</span><br><span class="line">        //  Pinned certificates are added to the trust. Without pinned certificates,</span><br><span class="line">        //  there is nothing to evaluate against.</span><br><span class="line">        //</span><br><span class="line">        //  From Apple Docs:</span><br><span class="line">        //          &quot;Do not implicitly trust self-signed certificates as anchors (kSecTrustOptionImplicitAnchors).</span><br><span class="line">        //           Instead, add your own (self-signed) CA certificate to the list of trusted anchors.&quot;</span><br><span class="line">        NSLog(@&quot;In order to validate a domain name for self signed certificates, you MUST use pinning.&quot;);</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    NSMutableArray *policies = [NSMutableArray array];</span><br><span class="line">    //验证主机名，则创建包含验证主机名的SSL校验策略，否则创建基本的BasicX509证书校验策略</span><br><span class="line">    if (self.validatesDomainName) &#123;</span><br><span class="line">        [policies addObject:(__bridge_transfer id)SecPolicyCreateSSL(true, (__bridge CFStringRef)domain)];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        [policies addObject:(__bridge_transfer id)SecPolicyCreateBasicX509()];</span><br><span class="line">    &#125;</span><br><span class="line">    //校验策略数组复制给serverTrust</span><br><span class="line">    SecTrustSetPolicies(serverTrust, (__bridge CFArrayRef)policies);</span><br><span class="line">    //如果检验模式为系统默认模式，允许不合法证书则直接返回检验通过，否则调用系统默认检验方法</span><br><span class="line">    if (self.SSLPinningMode == AFSSLPinningModeNone) &#123;</span><br><span class="line">        return self.allowInvalidCertificates || AFServerTrustIsValid(serverTrust);</span><br><span class="line">    &#125; else if (!AFServerTrustIsValid(serverTrust) &amp;&amp; !self.allowInvalidCertificates) &#123;</span><br><span class="line">        //其它检验模式，如果检验不通过并且不允许不合法证书则返回检验失败</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    switch (self.SSLPinningMode) &#123;</span><br><span class="line">        case AFSSLPinningModeNone://代码不会执行这个case</span><br><span class="line">        default://默认返回检验不通过</span><br><span class="line">            return NO;</span><br><span class="line">        case AFSSLPinningModeCertificate: &#123;</span><br><span class="line">            //将绑定的本地证书set集合转成array集合</span><br><span class="line">            NSMutableArray *pinnedCertificates = [NSMutableArray array];</span><br><span class="line">            for (NSData *certificateData in self.pinnedCertificates) &#123;</span><br><span class="line">                [pinnedCertificates addObject:(__bridge_transfer id)SecCertificateCreateWithData(NULL, (__bridge CFDataRef)certificateData)];</span><br><span class="line">            &#125;</span><br><span class="line">            //将本地证书设置成锚点证书</span><br><span class="line">            SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)pinnedCertificates);</span><br><span class="line">            //如果检验不通过，返回NO</span><br><span class="line">            if (!AFServerTrustIsValid(serverTrust)) &#123;</span><br><span class="line">                return NO;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // obtain the chain after being validated, which *should* contain the pinned certificate in the last position (if it&apos;s the Root CA)</span><br><span class="line">            //执行到此处，说明通过设置本地证书为锚点证书，校验通过，进一步校验服务器的证书链</span><br><span class="line">            //获取serverTrust的证书链</span><br><span class="line">            NSArray *serverCertificates = AFCertificateTrustChainForServerTrust(serverTrust);</span><br><span class="line">            </span><br><span class="line">            for (NSData *trustChainCertificate in [serverCertificates reverseObjectEnumerator]) &#123;</span><br><span class="line">                if ([self.pinnedCertificates containsObject:trustChainCertificate]) &#123;</span><br><span class="line">                    //如果服务器证书链中的某一个证书和本地证书相同则认为检验通过</span><br><span class="line">                    return YES;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            return NO;</span><br><span class="line">        &#125;</span><br><span class="line">        case AFSSLPinningModePublicKey: &#123;</span><br><span class="line">            NSUInteger trustedPublicKeyCount = 0;</span><br><span class="line">            //获取服务器返回的证书链中所有证书的公钥</span><br><span class="line">            NSArray *publicKeys = AFPublicKeyTrustChainForServerTrust(serverTrust);</span><br><span class="line">            //分别遍历服务器证书链中所有证书的公钥和本地所有证书的公钥对比，有相同则认为检验通过</span><br><span class="line">            for (id trustChainPublicKey in publicKeys) &#123;</span><br><span class="line">                for (id pinnedPublicKey in self.pinnedPublicKeys) &#123;</span><br><span class="line">                    if (AFSecKeyIsEqualToKey((__bridge SecKeyRef)trustChainPublicKey, (__bridge SecKeyRef)pinnedPublicKey)) &#123;</span><br><span class="line">                        trustedPublicKeyCount += 1;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return trustedPublicKeyCount &gt; 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="iOS-网络认证挑战"><a href="#iOS-网络认证挑战" class="headerlink" title="iOS 网络认证挑战"></a>iOS 网络认证挑战</h5><p>类结构图：<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/03/13/从HTTPS到AFNetworking的安全策略/15366517658129.jpg"></p>
+<h5 id="iOS-网络认证挑战"><a href="#iOS-网络认证挑战" class="headerlink" title="iOS 网络认证挑战"></a>iOS 网络认证挑战</h5><p>类结构图：<br><img src="/2019/03/13/从HTTPS到AFNetworking的安全策略/15366517658129.jpg" alt=""></p>
 <img src="http://www.plantuml.com/plantuml/svg/bL71Qi904BtlLmHFYlG7SfCKgL14ZD9ZMPA9Zcntm-oifOZ7VaM_edWK-ZVYRtGtIKaygFIKpPltvhsPMI0hY7hdx-Ffyt0-74zVFpqXCYMjZQRfSluyShm6pPX9HgEJjLGAz0fsuY4g2RUI8Nf5pK1QAZ7qc6780ZKjPGOrKXeBUKAGXqOD3RPed1rBL8uWCKwpXulwTmwsDDe6DH0PybyBEeVmG8tyWho-aYkkYN5_8FP2LC4Ad-FcB6absVdcpa8RCouCNNFnxOTHPdn5EmXnZEDMERudb3e3TPDI-jo6tXwXa4xnazIvGhswrvXWuvS_kxp1IET99-c5P7znwtQ2NHt1ecNmMQ_o-jDqKXqVUERBxuRoGRF8SAoomJftM_fA_8V77OzRSRnDej2_4o368WmFbGzM1Fu8IsrBjkCtQHXnj_uFtnHe2xGWPxbsRFfMIAFz1G00">
 
       
@@ -637,14 +535,6 @@ https单向验证只是去掉了客户端证书的验证过程，具体如下：
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">第三方框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态页面</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">框架</a>
               </li>
              
@@ -654,6 +544,14 @@ https单向验证只是去掉了客户端证书的验证过程，具体如下：
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">AOP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">第三方框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态页面</a>
               </li>
              
               <li class="article-tag-list-item">
