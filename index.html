@@ -356,7 +356,7 @@
         <blockquote>
 <p>iOS中UITableView是经常使用的控件，当数据量大时，为了方便用户快速查看和检索数据，通常会使用分组和索引栏，而系统的索引栏样式不支持自定义，因此参考QQ音乐的索引栏，结合项目中的使用情况，自定义了一个TableView的索引栏库</p>
 </blockquote>
-<p>QQ音乐的TableView的索引栏的样式如下图：<br><img src="/2019/07/03/自定义TbaleView索引栏/15620500541689.jpg" title="=178*310"></p>
+<p>QQ音乐的TableView的索引栏的样式如下图：<br><img src="/2019/07/03/自定义TbaleView索引栏/07/03/自定义TbaleView索引栏/15620500541689.jpg" title="=178*310"></p>
 <p>笔者认为要设计和实现一个功能或者库，首先不必关注实现细节，先分析清楚需求，然后做总体规划和设计。</p>
 <h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>参照QQ音乐的索引栏，一个自定义的索引栏有以下需求：</p>
 <ol>
@@ -463,7 +463,7 @@
         <h3 id="实现球随机布局"><a href="#实现球随机布局" class="headerlink" title="实现球随机布局"></a>实现球随机布局</h3><blockquote>
 <p>最近碰到一个需求，需要在界面上随机出一些大小、颜色、位置随机的球（圆形按钮），并能够保证视觉效果好看，并且可以切换上一屏和下一屏附带动画，针对该需求想了很多方法，写该篇文章记录下来</p>
 </blockquote>
-<p>效果如下图：<br><img src="/2019/04/01/球随机布局/15541202292931.jpg"></p>
+<p>效果如下图：<br><img src="/2019/04/01/球随机布局/04/01/球随机布局/15541202292931.jpg"></p>
 <p>代码地址：<a href="https://github.com/KeepJiang/GWCircleLayoutBall" target="_blank" rel="noopener">GWCircleLayoutBall</a></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>拿到上面UI图后，首先分析UI的需求，有以下规律：</p>
 <ol>
@@ -685,7 +685,7 @@
         <blockquote>
 <p><strong>CoreData</strong>是Apple官方为iOS提供的一个数据持久化方案，其本质是一个通过封装底层数据操作，让程序员以面向对象的方式存储和管理数据的ORM框架（Object-Relational Mapping：对象-关系映射，简称ORM）。虽然底层支持SQLite、二进制数据、xml等多种文件存储，但是主要还是用来操作SQLite数据库。<br>程序员不需要学习或者使用SQL语句，只需要使用<strong>CoreData</strong>框架提供的对象和接口以及图形化工具，即可完成SQLite数据库的创建、表关系、增删改查等一系列操作，在一定程度上降低了程序员的学习成本并增加了代码的统一性和可阅读性。</p>
 </blockquote>
-<h3 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h3><p><strong>CoreData</strong>作为一个ORM框架，需要解决实体对象和数据库数据的映射关系，将OC对象转化为数据，保存到SQLite文件中，同时能将保存在数据库中的数据还原成OC对象。概要结构如下：<br><img src="/2018/03/30/CoreData详解/15215371819279.jpg"></p>
+<h3 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h3><p><strong>CoreData</strong>作为一个ORM框架，需要解决实体对象和数据库数据的映射关系，将OC对象转化为数据，保存到SQLite文件中，同时能将保存在数据库中的数据还原成OC对象。概要结构如下：<br><img src="/2018/03/30/CoreData详解/03/30/CoreData详解/15215371819279.jpg"></p>
 <p><strong>CoreData</strong>主要包含以下几个类：</p>
 <ul>
 <li><strong>NSManagedObjectModel</strong>：托管对象模型，映射实体类和数据库数据的关系，本质是一个XML文件，后面简称<strong>MOM</strong></li>

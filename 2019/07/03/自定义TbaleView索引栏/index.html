@@ -15,13 +15,13 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/03/自定义TbaleView索引栏/index.html">
 <meta property="og:site_name" content="KeepJiang&#39;s blog">
 <meta property="og:description" content="记录学习的点点滴滴。">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/自定义TbaleView索引栏/15620500541689.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/自定义TbaleView索引栏/15621442430607.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/自定义TbaleView索引栏/07/03/自定义TbaleView索引栏/15620500541689.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/自定义TbaleView索引栏/07/03/自定义TbaleView索引栏/15621442430607.jpg">
 <meta property="og:updated_time" content="2019-07-03T09:52:49.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义TableView索引栏">
 <meta name="twitter:description" content="记录学习的点点滴滴。">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/03/自定义TbaleView索引栏/15620500541689.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/03/自定义TbaleView索引栏/07/03/自定义TbaleView索引栏/15620500541689.jpg">
   
     <link rel="alternative" href="/atom.xml" title="KeepJiang&#39;s blog" type="application/atom+xml">
   
@@ -175,7 +175,7 @@
         <blockquote>
 <p>iOS中UITableView是经常使用的控件，当数据量大时，为了方便用户快速查看和检索数据，通常会使用分组和索引栏，而系统的索引栏样式不支持自定义，因此参考QQ音乐的索引栏，结合项目中的使用情况，自定义了一个TableView的索引栏库</p>
 </blockquote>
-<p>QQ音乐的TableView的索引栏的样式如下图：<br><img src="/2019/07/03/自定义TbaleView索引栏/15620500541689.jpg" title="=178*310"></p>
+<p>QQ音乐的TableView的索引栏的样式如下图：<br><img src="/2019/07/03/自定义TbaleView索引栏/07/03/自定义TbaleView索引栏/15620500541689.jpg" title="=178*310"></p>
 <p>笔者认为要设计和实现一个功能或者库，首先不必关注实现细节，先分析清楚需求，然后做总体规划和设计。</p>
 <h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>参照QQ音乐的索引栏，一个自定义的索引栏有以下需求：</p>
 <ol>
@@ -214,7 +214,7 @@
 <p>另一个交互是监听绑定的TableView的滚动执行相应的选中索引操作和显示隐藏索引栏操作，如何监听滚动和停止滚动笔者只找到通过UIScrollView的代理方法，笔者开始想索引栏内部监听，但是想了通过KVO监听contentOffset，这时候无法监听到TableView的停止滚动。在UIScrollView的头文件中找到dragging属性能标识滚动和停止，但是由于该属性是readonly的无法通过KVO监听。笔者暂时未找到不通过UIScrollView的代理方法监听滚动和停止滚动的方案，而由于代理的唯一性，UITableViewDelegate继承自UIScrollViewDelegate，使用索引栏替换代理再传递的方法也不太合适。因此最后只能采用调用方实现UIScrollViewDelegate通知索引栏的方式监听滚动和停止滚动这种不优雅的方式，如果读者有好的方式请不吝指导。<br>因此索引栏暴露三个方法需要调用方调用，其中通过获取绑定的TableView获取到当前可见的cell的indexpath的第一个获取到section，即可获取到当前需要高亮的index。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark -- scroll</span><br><span class="line">- (void)scrollViewDidScroll:(UIScrollView *)scrollView&#123;</span><br><span class="line">    [self tableViewDidScroll];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView&#123;</span><br><span class="line">    [self tableViewDidEndScroll];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate&#123;</span><br><span class="line">    if (decelerate == NO) &#123;</span><br><span class="line">        [self scrollViewDidEndDecelerating:scrollView];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> tableView滚动</span><br><span class="line"> */</span><br><span class="line">- (void)tableViewDidScroll&#123;</span><br><span class="line">    //开始滚动，首先判断索引栏是常驻显示还是</span><br><span class="line">    //计算出当前滚动到的section</span><br><span class="line">    NSInteger index = self.tableView.indexPathsForVisibleRows[0].section;</span><br><span class="line">    [self didSelectRowIndex:index byTouch:NO];</span><br><span class="line">    //如果是滚动显示并且当前是隐藏状态</span><br><span class="line">    if (kGWTableViewIndexBarScrollShowStyle == self.showStyle &amp;&amp; self.hidden &amp;&amp; self.indexTitlesArray.count &gt;= self.minimumShowCount) &#123;</span><br><span class="line">        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismissIndexBar) object:nil];</span><br><span class="line">        [self showIndexBar];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> tableView停止滚动</span><br><span class="line"> */</span><br><span class="line">- (void)tableViewDidEndScroll&#123;</span><br><span class="line">    if (kGWTableViewIndexBarScrollShowStyle == self.showStyle &amp;&amp; !self.hidden) &#123;</span><br><span class="line">        [self performSelector:@selector(dismissIndexBar) withObject:nil afterDelay:1.0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实现完上面的交互后，该索引栏基本已经实现完了。显示隐藏索引栏和显示隐藏指示器视图只是最简单的透明度UIView动画，这里就不贴代码了，读者有兴趣可以直接看源码，其中只需要注意延迟执行隐藏动画，并在显示前取消隐藏操作即可。</p>
-<p>源码地址为：<a href="https://github.com/KeepJiang/GWTableViewIndexBar" target="_blank" rel="noopener">GWTableViewIndexBar</a><br>最后的效果图如下：<br><img src="/2019/07/03/自定义TbaleView索引栏/15621442430607.jpg" title="=178*310"></p>
+<p>源码地址为：<a href="https://github.com/KeepJiang/GWTableViewIndexBar" target="_blank" rel="noopener">GWTableViewIndexBar</a><br>最后的效果图如下：<br><img src="/2019/07/03/自定义TbaleView索引栏/07/03/自定义TbaleView索引栏/15621442430607.jpg" title="=178*310"></p>
 
       
 
